@@ -35,10 +35,7 @@ namespace emotion_viewer.cs
         public int NUM_PRIMARY_EMOTIONS = 7;
         
          
-         private static readonly string AliveMethod = "/osctest/alive";
-         private static readonly string TestMethod = "/osctest/test";
-         System.Diagnostics.ProcessStartInfo proc;
-         Process exeProcess;
+        
 
        
 
@@ -53,25 +50,8 @@ namespace emotion_viewer.cs
             FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
             Panel2.Paint += new PaintEventHandler(Panel_Paint);
         }
-        private static OscBundle CreateTestBundle()
-        {
-            IPEndPoint sourceEndPoint = new IPEndPoint(IPAddress.Loopback, Program.Port);
-            OscBundle bundle = new OscBundle(sourceEndPoint);
-
-            OscBundle nestedBundle = new OscBundle(sourceEndPoint);
-            OscMessage nestedMessage = new OscMessage(sourceEndPoint, TestMethod);
-            nestedMessage.AppendNil();
-            nestedMessage.Append("Some String");
-            nestedMessage.Append(10);
-            
-            bundle.Append(nestedBundle);
-
-            OscMessage message = new OscMessage(sourceEndPoint, AliveMethod);
-            message.Append(9876.543f);
-            bundle.Append(message);
-
-            return bundle;
-        }
+        
+        
         private void PopulateDeviceMenu()
         {
             PXCMSession.ImplDesc desc = new PXCMSession.ImplDesc();

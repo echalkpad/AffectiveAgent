@@ -112,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmotionDetection.cs" />
-    <Compile Include="ITransmitter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,7 +130,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="UdpTransmitter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

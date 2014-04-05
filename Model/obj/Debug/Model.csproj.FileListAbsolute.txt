@@ -5,5 +5,7 @@ E:\Dev\CS\Model\bin\Debug\Model.pdb
 E:\Dev\CS\Model\obj\Debug\Model.exe
 E:\Dev\CS\Model\obj\Debug\Model.pdb
 E:\Dev\AffectiveAgent\Model\bin\Debug\Model.exe.config
+E:\Dev\AffectiveAgent\Model\bin\Debug\Model.exe
+E:\Dev\AffectiveAgent\Model\bin\Debug\Model.pdb
 E:\Dev\AffectiveAgent\Model\obj\Debug\Model.exe
 E:\Dev\AffectiveAgent\Model\obj\Debug\Model.pdb

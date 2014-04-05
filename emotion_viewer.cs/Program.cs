@@ -18,7 +18,7 @@ namespace emotion_viewer.cs
     
     public class Program
     {
-        public static readonly int Port = 5103; 
+        
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
