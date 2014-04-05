@@ -26,3 +26,7 @@ E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\SharpOSC.dll
 E:\Dev\AffectiveAgent\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.exe.config
 E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.exe
 E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.pdb
+E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csprojResolveAssemblyReference.cache
+E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.MainForm.resources
+E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.Properties.Resources.resources
+E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csproj.GenerateResource.Cache
