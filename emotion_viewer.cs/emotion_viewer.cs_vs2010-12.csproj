@@ -91,14 +91,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bespoke.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x64\Debug\Bespoke.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Bespoke.Common.Osc, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x64\Debug\Bespoke.Common.Osc.dll</HintPath>
-    </Reference>
     <Reference Include="libpxcclr">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>$(PXCCLRPath)</HintPath>
