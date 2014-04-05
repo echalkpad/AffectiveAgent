@@ -1,0 +1,25 @@
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.MainForm.resources
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.Properties.Resources.resources
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csproj.GenerateResource.Cache
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.exe.config
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.exe
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.pdb
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\Bespoke.Common.dll
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\Bespoke.Common.Osc.dll
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\bin\x86\Debug\libpxcclr.dll
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.exe
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.pdb
+E:\ULeiden\Affective Computing\Project\pvarcholik-bespoke.osc-4ef8350e4f2f\pvarcholik-bespoke.osc-4ef8350e4f2f\Samples\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csprojResolveAssemblyReference.cache
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.exe.config
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.exe
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\emotion_viewer.cs.pdb
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\Bespoke.Common.dll
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\Bespoke.Common.Osc.dll
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\libpxcclr.dll
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csprojResolveAssemblyReference.cache
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.MainForm.resources
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.Properties.Resources.resources
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csproj.GenerateResource.Cache
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.exe
+E:\Dev\CS\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.pdb
+E:\Dev\CS\emotion_viewer.cs\bin\x86\Debug\SharpOSC.dll
