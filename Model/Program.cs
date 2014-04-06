@@ -21,10 +21,20 @@ namespace Model
 
         static void Main(string[] args)
         {
+            
             // Com port can be changed here 
-            serialPort1.PortName = "COM6";
-            serialPort1.BaudRate = 9600;
-            serialPort1.Open();
+            try
+            {
+                serialPort1.PortName = "COM6";
+                serialPort1.BaudRate = 9600;
+                serialPort1.Open();
+            
+            }
+            catch (System.Exception)
+            {
+                Console.Write("Exception caught while trying to open  a COM connection");
+                
+            }
             
             
             // The cabllback function

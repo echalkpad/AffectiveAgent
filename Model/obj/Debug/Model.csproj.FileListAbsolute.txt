@@ -9,4 +9,3 @@ E:\Dev\AffectiveAgent\Model\bin\Debug\Model.exe
 E:\Dev\AffectiveAgent\Model\bin\Debug\Model.pdb
 E:\Dev\AffectiveAgent\Model\obj\Debug\Model.exe
 E:\Dev\AffectiveAgent\Model\obj\Debug\Model.pdb
-E:\Dev\AffectiveAgent\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

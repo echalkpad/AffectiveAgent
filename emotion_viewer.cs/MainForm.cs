@@ -33,7 +33,11 @@ namespace emotion_viewer.cs
         
         public int NUM_EMOTIONS  = 10;
         public int NUM_PRIMARY_EMOTIONS = 7;
-        
+        Stopwatch timer = new Stopwatch();
+         List<int> valanceList = new List<int>();
+           
+            
+         
          
         
 
@@ -136,6 +140,7 @@ namespace emotion_viewer.cs
             Stop.Enabled = true;
             stop = false;
             System.Threading.Thread thread = new System.Threading.Thread(DoTracking);
+            timer.Start();
             thread.Start();           
             System.Threading.Thread.Sleep(5);
 
@@ -326,11 +331,9 @@ namespace emotion_viewer.cs
         {
             return Record.Checked;
         }
-
+       
         public void DrawLocation(PXCMEmotion.EmotionData[] data)
         {
-           
-
             
             lock (this)
             {
@@ -384,6 +387,7 @@ namespace emotion_viewer.cs
                     }
                     if ((spidx != -1))
                     {
+                        
                         // Here is where it detects the Valence..
                         g.DrawString(SentimentLabels[spidx], font, brushTxt, (float)(data[0].rectangle.x + data[0].rectangle.w), (float)data[0].rectangle.y + font.GetHeight());
                         
@@ -391,14 +395,43 @@ namespace emotion_viewer.cs
                             initialize OSC object..
                          *                          * 
                          * Collect 30 seconds of  Valence  in an array .
-                         * Then find  the average 
+                         * Then find  the most occured 
                          * 
-                         * Send the average to OSC as a KEY Value Pair
+                         * Send the via OSC
                             
                          
                          */
-                          
-                        TransmitData(SentimentLabels[spidx].ToString());
+                        
+                        if (timer.Elapsed.TotalSeconds < TimeSpan.FromSeconds(10).TotalSeconds)
+                        {
+                            valanceList.Add(spidx);
+
+                        }
+                        else
+                        {
+                            
+                            // Find the valence that has occured the most  
+                            if (valanceList.Count > 0)
+                            {
+
+                              //  string mostOccured = valanceList.GroupBy(s => s).OrderByDescending(x => x.Count()).First();
+
+                                var mostOccured = valanceList.GroupBy(i => i).OrderByDescending(grp => grp.Count())
+                                            .Select(grp => grp.Key).First();
+                                // Send the valence to the affective model to be checked
+                                TransmitData(SentimentLabels[mostOccured].ToString());
+                                valanceList.Clear();
+                               
+                            }
+                            timer.Reset();
+                            timer.Start();
+                            
+                        
+                        }
+                        
+                        
+                        
+                        
                         
                     
                     }
@@ -413,6 +446,7 @@ namespace emotion_viewer.cs
             }
 
         }
+       
 
         public string GetFileName()
         {
