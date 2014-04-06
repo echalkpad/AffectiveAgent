@@ -1,0 +1,8 @@
+E:\Dev\AffectiveAgent\Model\bin\Debug\Model.exe.config
+E:\Dev\AffectiveAgent\Model\bin\Debug\Model.exe
+E:\Dev\AffectiveAgent\Model\bin\Debug\Model.pdb
+E:\Dev\AffectiveAgent\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\Dev\AffectiveAgent\Model\obj\Debug\Model.Properties.Resources.resources
+E:\Dev\AffectiveAgent\Model\obj\Debug\Model.csproj.GenerateResource.Cache
+E:\Dev\AffectiveAgent\Model\obj\Debug\Model.exe
+E:\Dev\AffectiveAgent\Model\obj\Debug\Model.pdb

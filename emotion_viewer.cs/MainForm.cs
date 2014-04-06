@@ -129,7 +129,7 @@ namespace emotion_viewer.cs
         {
 
 
-            TransmitData("positive");
+           
 
             MainMenu.Enabled = false;
             Start.Enabled = false;
@@ -147,7 +147,7 @@ namespace emotion_viewer.cs
         private void TransmitData(string valence)
         {
 
-            var message = new SharpOSC.OscMessage("/test/1", 23, 42.01f, "hello world");
+            var message = new SharpOSC.OscMessage("/test/1", valence);
             var sender = new SharpOSC.UDPSender("127.0.0.1", 55555);
             sender.Send(message);
            
@@ -389,8 +389,7 @@ namespace emotion_viewer.cs
                         
                         /* 
                             initialize OSC object..
-                         * 
-                         * Count for 30 seconds
+                         *                          * 
                          * Collect 30 seconds of  Valence  in an array .
                          * Then find  the average 
                          * 
@@ -398,7 +397,8 @@ namespace emotion_viewer.cs
                             
                          
                          */
-                       
+                          
+                        TransmitData(SentimentLabels[spidx].ToString());
                         
                     
                     }

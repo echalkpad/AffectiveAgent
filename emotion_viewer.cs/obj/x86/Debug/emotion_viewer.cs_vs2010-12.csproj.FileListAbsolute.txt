@@ -33,3 +33,4 @@ E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.Properti
 E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csproj.GenerateResource.Cache
 E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.exe
 E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs.pdb
+E:\Dev\AffectiveAgent\emotion_viewer.cs\obj\x86\Debug\emotion_viewer.cs_vs2010-12.csprojResolveAssemblyReference.cache
