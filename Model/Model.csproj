@@ -45,8 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AudioPacket.cs" />
+    <Compile Include="COM.cs" />
+    <Compile Include="Interpreter.cs" />
+    <Compile Include="Model.cs" />
+    <Compile Include="Person.cs" />
+    <Compile Include="PersonAudioPacket.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receiver.cs" />
+    <Compile Include="VideoFrame.cs" />
+    <Compile Include="VideoPacket.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
