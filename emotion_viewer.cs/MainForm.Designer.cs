@@ -1,4 +1,4 @@
-﻿namespace emotion_viewer.cs
+﻿namespace EmotionViewer
 {
     partial class MainForm
     {

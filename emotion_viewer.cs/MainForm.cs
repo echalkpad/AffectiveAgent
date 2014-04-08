@@ -11,7 +11,7 @@ using System.Text;
 using System.Windows.Forms;
 using Model;
 
-namespace emotion_viewer.cs
+namespace EmotionViewer
 {
      public enum DemoType
     {
@@ -22,7 +22,8 @@ namespace emotion_viewer.cs
     
     public partial class MainForm : Form
     {
-       
+        Main emotionViewer;
+
         private PXCMSession session;
         private volatile bool closing = false;
         public  volatile bool stop = false;
@@ -36,16 +37,11 @@ namespace emotion_viewer.cs
         public int NUM_PRIMARY_EMOTIONS = 7;
         Stopwatch timer = new Stopwatch();
          List<int> valanceList = new List<int>();
-           
-            
-         
-         
-        
 
-       
+         public MainForm(Main emotionViewer, PXCMSession session)
+         {
+             this.emotionViewer = emotionViewer;
 
-        public MainForm(PXCMSession session)
-        {
             InitializeComponent();
 
             this.session = session;
@@ -149,15 +145,6 @@ namespace emotion_viewer.cs
 
 
            
-        }
-        private void TransmitData(string valence)
-        {
-
-            var message = new SharpOSC.OscMessage("/test/1", valence);
-            var sender = new SharpOSC.UDPSender("127.0.0.1", 55555);
-            sender.Send(message);
-           
-        
         }
 
         delegate void DoTrackingCompleted();
@@ -390,49 +377,7 @@ namespace emotion_viewer.cs
                     {
                         // Here is where it detects the Valence..
                         g.DrawString(SentimentLabels[spidx], font, brushTxt, (float)(data[0].rectangle.x + data[0].rectangle.w), (float)data[0].rectangle.y + font.GetHeight());
-                        
-                        /* 
-                            initialize OSC object..
-                         *                          * 
-                         * Collect 30 seconds of  Valence  in an array .
-                         * Then find  the most occured 
-                         * 
-                         * Send the via OSC
-                            
-                         
-                         */
-                        
-                        if (timer.Elapsed.TotalSeconds < TimeSpan.FromSeconds(10).TotalSeconds)
-                        {
-                            valanceList.Add(spidx);
-
-                        }
-                        else
-                        {
-                            
-                            // Find the valence that has occured the most  
-                            if (valanceList.Count > 0)
-                            {
-
-                                var mostOccured = valanceList.GroupBy(i => i).OrderByDescending(grp => grp.Count())
-                                            .Select(grp => grp.Key).First();
-                                // Send the valence to the affective model to be checked
-                                TransmitData(SentimentLabels[mostOccured].ToString());
-                                valanceList.Clear();
-                               
-                            }
-                            // reset and start timer
-                            timer.Reset();
-                            timer.Start();
-                            
-                        
-                        }
-                        
-                        
-                        
-                        
-                        
-                    
+                        getSender().update(spidx);
                     }
                     
                 }
@@ -444,6 +389,11 @@ namespace emotion_viewer.cs
                 g.Dispose();
             }
 
+        }
+
+        private Sender getSender()
+        {
+            return emotionViewer.getSender();
         }
        
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "emotion_viewer.cs_vs2010-12", "emotion_viewer.cs\emotion_viewer.cs_vs2010-12.csproj", "{C42F9346-5D29-46D0-AE79-8C05365A908D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionViewer", "emotion_viewer.cs\EmotionViewer.csproj", "{C42F9346-5D29-46D0-AE79-8C05365A908D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{B9E2E22B-0AE1-440F-8AFF-160F44732664}"
 EndProject

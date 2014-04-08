@@ -8,7 +8,7 @@
     <ProjectGuid>{C42F9346-5D29-46D0-AE79-8C05365A908D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>emotion_viewer.cs</RootNamespace>
+    <RootNamespace>EmotionViewer.cs</RootNamespace>
     <AssemblyName>emotion_viewer.cs</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EmotionDetection.cs" />
+    <Compile Include="lib\Main.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +130,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Sender.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -174,8 +176,6 @@
       <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="lib\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
