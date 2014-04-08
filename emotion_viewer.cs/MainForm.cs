@@ -35,12 +35,10 @@ namespace EmotionViewer
         
         public int NUM_EMOTIONS  = 10;
         public int NUM_PRIMARY_EMOTIONS = 7;
-        Stopwatch timer = new Stopwatch();
-         List<int> valanceList = new List<int>();
 
-         public MainForm(Main emotionViewer, PXCMSession session)
-         {
-             this.emotionViewer = emotionViewer;
+        public MainForm(Main emotionViewer, PXCMSession session)
+        {
+            this.emotionViewer = emotionViewer;
 
             InitializeComponent();
 
@@ -137,21 +135,13 @@ namespace EmotionViewer
             Stop.Enabled = true;
             stop = false;
             System.Threading.Thread thread = new System.Threading.Thread(DoTracking);
-            timer.Start();
             thread.Start();           
-            System.Threading.Thread.Sleep(5);
-
-            
-
-
-           
+            System.Threading.Thread.Sleep(5);           
         }
 
         delegate void DoTrackingCompleted();
         private void DoTracking()
         {
-
-            
             EmotionDetection ft = new EmotionDetection(this);
             if (simpleToolStripMenuItem.Checked)
             {
@@ -388,7 +378,6 @@ namespace EmotionViewer
                 font.Dispose();
                 g.Dispose();
             }
-
         }
 
         private Sender getSender()
@@ -396,12 +385,9 @@ namespace EmotionViewer
             return emotionViewer.getSender();
         }
        
-
         public string GetFileName()
         {
             return filename;
         }
-
     }
-
 }

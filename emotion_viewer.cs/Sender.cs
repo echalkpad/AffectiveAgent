@@ -1,10 +1,13 @@
 ﻿using SharpOSC;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace EmotionViewer
 {
@@ -55,9 +58,19 @@ namespace EmotionViewer
 
         private void TransmitData(string valence)
         {
-            var message = new OscMessage("/test/1", valence);
+            VideoPacket packet = new VideoPacket("valence - " + valence);
+            var message = new OscMessage("/test/1", ObjectToString(packet));
             var udpSender = new UDPSender("127.0.0.1", 55555);
             udpSender.Send(message);
+        }
+
+        public string ObjectToString(object obj)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                new BinaryFormatter().Serialize(ms, obj);
+                return Convert.ToBase64String(ms.ToArray());
+            }
         }
     }
 }
