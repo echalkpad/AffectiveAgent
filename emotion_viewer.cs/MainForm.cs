@@ -414,8 +414,6 @@ namespace emotion_viewer.cs
                             if (valanceList.Count > 0)
                             {
 
-                              //  string mostOccured = valanceList.GroupBy(s => s).OrderByDescending(x => x.Count()).First();
-
                                 var mostOccured = valanceList.GroupBy(i => i).OrderByDescending(grp => grp.Count())
                                             .Select(grp => grp.Key).First();
                                 // Send the valence to the affective model to be checked
@@ -423,6 +421,7 @@ namespace emotion_viewer.cs
                                 valanceList.Clear();
                                
                             }
+                            // reset and start timer
                             timer.Reset();
                             timer.Start();
                             
