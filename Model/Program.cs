@@ -15,49 +15,9 @@ namespace Model
 {
     class Program
     {
-        // SerialPort for comunicating with the  Arduino Board
-        bool ledState = false;
-        static SerialPort serialPort1 = new SerialPort();
-
         static void Main(string[] args)
         {
-            
-            // Com port can be changed here 
-            try
-            {
-                serialPort1.PortName = "COM6";
-                serialPort1.BaudRate = 9600;
-                serialPort1.Open();
-            
-            }
-            catch (System.Exception)
-            {
-                Console.Write("Exception caught while trying to open  a COM connection");
-                
-            }
-            
-            
-            // The cabllback function
-                HandleOscPacket callback = delegate(OscPacket packet)
-                {
-                    var messageReceived = (OscMessage)packet;
-                    Console.WriteLine(messageReceived.Arguments[0].ToString());
-                    Console.WriteLine("Affect Recieved!");
-                };
-
-                var listener = new UDPListener(55555, callback);
-
-                Console.WriteLine("Press any key to stop receiving");
-                Console.ReadLine();
-                listener.Close();
-                if (serialPort1.IsOpen) serialPort1.Close();
-            }
-            
-            
-          
+            Model model = new Model();
         }
-        
-        
-    
-    
+    }
 }

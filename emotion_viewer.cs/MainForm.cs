@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using Model;
 
 namespace emotion_viewer.cs
 {
@@ -387,7 +388,6 @@ namespace emotion_viewer.cs
                     }
                     if ((spidx != -1))
                     {
-                        
                         // Here is where it detects the Valence..
                         g.DrawString(SentimentLabels[spidx], font, brushTxt, (float)(data[0].rectangle.x + data[0].rectangle.w), (float)data[0].rectangle.y + font.GetHeight());
                         
