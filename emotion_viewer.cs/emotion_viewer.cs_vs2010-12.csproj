@@ -96,9 +96,8 @@
       <HintPath>$(PXCCLRPath)</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SharpOSC, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\x64\Debug\SharpOSC.dll</HintPath>
+    <Reference Include="SharpOSC">
+      <HintPath>lib\SharpOSC.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -174,6 +173,9 @@
       <Project>{b9e2e22b-0ae1-440f-8aff-160f44732664}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lib\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
