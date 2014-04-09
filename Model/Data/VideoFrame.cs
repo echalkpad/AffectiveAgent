@@ -50,7 +50,7 @@ namespace Model
             info.AddValue("valenceIntensity", valenceIntensity);
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return "VideoFrame<" + time + ", " + emotion + ", " + emotionIntensity + ", " + valence + ", " + valenceIntensity + ">";
         }

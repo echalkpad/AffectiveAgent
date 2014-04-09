@@ -40,7 +40,7 @@
             this.Live = new System.Windows.Forms.ToolStripMenuItem();
             this.Playback = new System.Windows.Forms.ToolStripMenuItem();
             this.Record = new System.Windows.Forms.ToolStripMenuItem();
-            this.Location = new System.Windows.Forms.CheckBox();
+            this.LocationCheckBox = new System.Windows.Forms.CheckBox();
             this.Status2 = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.Scale2 = new System.Windows.Forms.CheckBox();
@@ -160,17 +160,17 @@
             // 
             // Location
             // 
-            this.Location.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.LocationCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.Location.AutoSize = true;
-            this.Location.Checked = true;
-            this.Location.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.Location.Location = new System.Drawing.Point(577, 53);
-            this.Location.Name = "Location";
-            this.Location.Size = new System.Drawing.Size(67, 17);
-            this.Location.TabIndex = 19;
-            this.Location.Text = "Location";
-            this.Location.UseVisualStyleBackColor = true;
+            this.LocationCheckBox.AutoSize = true;
+            this.LocationCheckBox.Checked = true;
+            this.LocationCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.LocationCheckBox.Location = new System.Drawing.Point(577, 53);
+            this.LocationCheckBox.Name = "Location";
+            this.LocationCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.LocationCheckBox.TabIndex = 19;
+            this.LocationCheckBox.Text = "Location";
+            this.LocationCheckBox.UseVisualStyleBackColor = true;
             // 
             // Status2
             // 
@@ -224,7 +224,7 @@
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.Scale2);
             this.Controls.Add(this.Status2);
-            this.Controls.Add(this.Location);
+            this.Controls.Add(this.LocationCheckBox);
             this.Controls.Add(this.Stop);
             this.Controls.Add(this.Start);
             this.Controls.Add(this.MainMenu);
@@ -251,7 +251,7 @@
         private System.Windows.Forms.ToolStripMenuItem sourceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem moduleToolStripMenuItem;
         private System.Windows.Forms.MenuStrip MainMenu;
-        private System.Windows.Forms.CheckBox Location;
+        private System.Windows.Forms.CheckBox LocationCheckBox;
         private System.Windows.Forms.StatusStrip Status2;
         private System.Windows.Forms.ToolStripStatusLabel StatusLabel;
         private System.Windows.Forms.CheckBox Scale2;

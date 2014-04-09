@@ -47,7 +47,7 @@ namespace Model
             return person;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string str = "VideoPacket<" + person + ", List<";
             foreach (VideoFrame frame in videoFrames)

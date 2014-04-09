@@ -321,7 +321,7 @@ namespace EmotionViewer
                 Brush brush = new SolidBrush(Color.Red);
                 Font font = new Font(Font.FontFamily, 11, FontStyle.Bold);
                 Brush brushTxt = new SolidBrush(Color.Cyan);
-                if (Location.Checked)
+                if (LocationCheckBox.Checked)
                 {
                     Point[] points4 = new Point[]{
                         new Point((int)data[0].rectangle.x,(int)data[0].rectangle.y),
