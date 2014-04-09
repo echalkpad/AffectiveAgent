@@ -24,7 +24,7 @@ namespace Model
         {
             //Get the values from info and assign them to the appropriate properties
             person = (String)info.GetValue("person", typeof(String));
-            //videoFrames = (String)info.GetValue("EmployeeName", typeof(string));
+            videoFrames = (List<VideoFrame>)info.GetValue("videoFrames", typeof(List<VideoFrame>));
         }
         
         //Serialization function.
@@ -45,6 +45,17 @@ namespace Model
         public string getPerson()
         {
             return person;
+        }
+
+        public string ToString()
+        {
+            string str = "VideoPacket<" + person + ", List<";
+            foreach (VideoFrame frame in videoFrames)
+            {
+                str += "(" + frame.ToString() + ")";
+            }
+            str += ">>";
+            return str;
         }
     }
 }

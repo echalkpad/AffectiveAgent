@@ -17,6 +17,7 @@ namespace EmotionViewer
 {
     class Program
     {
+        [STAThread]
         static void Main()
         {
             Main main = new Main();

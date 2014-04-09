@@ -19,9 +19,9 @@ namespace Model
         bool ledState = false;
         static SerialPort serialPort1 = new SerialPort();
 
-        Model model;
+        Main model;
 
-        public COM(Model model)
+        public COM(Main model)
         {
             this.model = model;
         }

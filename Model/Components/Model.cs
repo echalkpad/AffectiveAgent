@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class Model
+    class Main
     {
         Person personA;
         Person personB;
@@ -14,7 +14,7 @@ namespace Model
         Interpreter interpreter;
         COM com;
 
-        public Model()
+        public Main()
         {
             personA = new Person("A");
             personB = new Person("B");

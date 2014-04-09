@@ -10,13 +10,13 @@ namespace Model
     [Serializable()]
     public class VideoFrame : ISerializable
     {
-        int time;
+        long time;
         string emotion;
-        double emotionIntensity;
+        float emotionIntensity;
         string valence;
-        double valenceIntensity;
+        float valenceIntensity;
 
-        public VideoFrame(int time, string emotion, double emotionIntensity, string valence, double valenceIntensity)
+        public VideoFrame(long time, string emotion, float emotionIntensity, string valence, float valenceIntensity)
         {
             this.time = time;
             this.emotion = emotion;
@@ -29,7 +29,12 @@ namespace Model
         public VideoFrame(SerializationInfo info, StreamingContext ctxt)
         {
             //Get the values from info and assign them to the appropriate properties
-            time = (int)info.GetValue("time", typeof(int));
+            time = (long)info.GetValue("time", typeof(long));
+            emotion = (string)info.GetValue("emotion", typeof(string));
+            emotionIntensity = (float)info.GetValue("emotionIntensity", typeof(float));
+            valence = (string)info.GetValue("valence", typeof(string));
+            valenceIntensity = (float)info.GetValue("valenceIntensity", typeof(float));
+
         }
 
         //Serialization function.
@@ -39,6 +44,15 @@ namespace Model
             // read the values with the same name. For ex:- If you write EmpId as "EmployeeId"
             // then you should read the same with "EmployeeId"
             info.AddValue("time", time);
+            info.AddValue("emotion", emotion);
+            info.AddValue("emotionIntensity", emotionIntensity);
+            info.AddValue("valence", valence);
+            info.AddValue("valenceIntensity", valenceIntensity);
+        }
+
+        public string ToString()
+        {
+            return "VideoFrame<" + time + ", " + emotion + ", " + emotionIntensity + ", " + valence + ", " + valenceIntensity + ">";
         }
     }
 }

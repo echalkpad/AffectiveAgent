@@ -335,6 +335,7 @@ namespace EmotionViewer
 
                 bool emotionPresent = false;
                 int epidx = -1; int maxscoreE = -3; float maxscoreI = 0;
+                float maxscoreI1 = 0;
                 for (int i = 0; i < NUM_PRIMARY_EMOTIONS; i++)
                 {
                     if (data[i].evidence  < maxscoreE) continue;
@@ -346,7 +347,7 @@ namespace EmotionViewer
                 if ((epidx != -1) && (maxscoreI > 0.4))
                 {
                     // Here is where it detects the emotion to display
-                    
+                    maxscoreI1 = maxscoreI;
                     g.DrawString(EmotionLabels[epidx], font, brushTxt, (float)(data[0].rectangle.x + data[0].rectangle.w), (float)data[0].rectangle.y);
                     emotionPresent = true;
                 }
@@ -367,7 +368,7 @@ namespace EmotionViewer
                     {
                         // Here is where it detects the Valence..
                         g.DrawString(SentimentLabels[spidx], font, brushTxt, (float)(data[0].rectangle.x + data[0].rectangle.w), (float)data[0].rectangle.y + font.GetHeight());
-                        getSender().update(spidx);
+                        getSender().update(EmotionLabels[epidx], maxscoreI1, SentimentLabels[spidx], maxscoreI);
                     }
                     
                 }

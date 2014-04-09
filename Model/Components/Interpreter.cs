@@ -9,9 +9,9 @@ namespace Model
 
     class Interpreter
     {
-        Model model; 
+        Main model; 
 
-        public Interpreter(Model model)
+        public Interpreter(Main model)
         {
             this.model = model;
         }

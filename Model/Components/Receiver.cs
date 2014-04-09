@@ -15,9 +15,9 @@ namespace Model
 {
     class Receiver
     {
-        Model model;
+        Main model;
 
-        public Receiver(Model model)
+        public Receiver(Main model)
         {
             this.model = model;
 
@@ -27,8 +27,7 @@ namespace Model
                 var messageReceived = (OscMessage) packet;
                 String message = messageReceived.Arguments[0].ToString();
                 VideoPacket videoPacket = (VideoPacket)StringToObject(message);
-                // Console.WriteLine(messageReceived.Arguments[0].ToString());
-                Console.WriteLine(videoPacket.getPerson());
+                Console.WriteLine(videoPacket.ToString());
                 Console.WriteLine("Affect Recieved!");
             };
 
