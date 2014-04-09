@@ -14,7 +14,7 @@ namespace Model
     {
         // SerialPort for comunicating with the  Arduino Board
         bool ledState = false;
-        static SerialPort serialPort1 = new SerialPort();
+         SerialPort serialPort1 = new SerialPort();
 
         Main model;
 
@@ -23,12 +23,21 @@ namespace Model
             this.model = model;
         }
 
-        public void switchLight()
+        public void switchLightOn()
         {
-            ledState = !ledState;
+            serialPort1.Write("1");           
+            ledState = true; 
+          
+        }
+        public void switchLightOff()
+        { 
+            this.serialPort1.Write("0");          
+            ledState = false; 
+        
+        
         }
 
-        public void setLight() {                        
+        public void OpenCom() {                        
             // Com port can be changed here 
             try
             {
@@ -42,6 +51,20 @@ namespace Model
             }
 
             if (serialPort1.IsOpen) serialPort1.Close();
+        }
+
+        public void CloseCOM()
+        {
+            try
+            {
+                if (serialPort1.IsOpen) serialPort1.Close();
+            }
+            catch (Exception)
+            {
+
+                Console.Write("Error Closing Connection");
+            }
+           
         }
     }
 }
