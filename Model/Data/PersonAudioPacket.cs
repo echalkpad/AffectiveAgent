@@ -13,6 +13,7 @@ namespace Model
         double totalTime;
         int numberOfInterruptions;
         double maxValue;
+        
 
         public PersonAudioPacket(string person, double individualsTime, double totalTime, int numberOfInterruptions, double maxValue)
         {
@@ -21,6 +22,16 @@ namespace Model
             this.totalTime = totalTime;
             this.numberOfInterruptions = numberOfInterruptions;
             this.maxValue = maxValue;
+        }
+      
+
+        public string getPerson()
+        {
+            return person;
+        }
+        public override string ToString()
+        {
+            return "PersonAudioPacket<" + person + ", " + individualsTime + ", " + totalTime + ", " + numberOfInterruptions + ", " + maxValue + ">";
         }
 
     }
