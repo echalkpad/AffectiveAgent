@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-
-    class Interpreter
+    public class Interpreter
     {
-        Main model; 
+        Model model; 
 
-        public Interpreter(Main model)
+        public Interpreter(Model model)
         {
             this.model = model;
         }

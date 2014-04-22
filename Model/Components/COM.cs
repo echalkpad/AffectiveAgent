@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class COM
+    public class COM
     {
         // SerialPort for comunicating with the  Arduino Board
         bool ledState = false;
          SerialPort serialPort1 = new SerialPort();
 
-        Main model;
+        Model model;
 
-        public COM(Main model)
+        public COM(Model model)
         {
             this.model = model;
         }

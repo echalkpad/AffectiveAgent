@@ -15,7 +15,7 @@ namespace Model
     {
         static void Main(string[] args)
         {
-            Main model = new Main();
+            Model model = new Model();
         }
     }
 }

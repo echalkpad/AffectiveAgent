@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class Person
+    public class Person
     {
         string label;
         List<VideoPacket> videoPackets;

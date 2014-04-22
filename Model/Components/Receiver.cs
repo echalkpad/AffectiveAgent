@@ -13,14 +13,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Model
 {
-    class Receiver
+    public class Receiver
     {
-        Main model;
+        Model model;
         AudioPacket audioPacket;
 
-        public Receiver(Main model)
+        public Receiver(Model model)
         {
             this.model = model;
+            print("test3");
             audioPacket = new AudioPacket();
 
             // The video cabllback function
@@ -29,13 +30,11 @@ namespace Model
                 var messageReceived = (OscMessage)packet;
                 String message = messageReceived.Arguments[0].ToString();
                 VideoPacket videoPacket = (VideoPacket)StringToObject(message);
-                Console.WriteLine(videoPacket.ToString());
-                Console.WriteLine("Video Affect Recieved!");
+                print(videoPacket.ToString());
+                print("Video Affect Recieved!");
             };
 
             var listener = new UDPListener(55555, callback);
-
-            
 
             // Audio Reciever
             HandleOscPacket Audiocallback = delegate(OscPacket packet)
@@ -75,24 +74,24 @@ namespace Model
                     {
                         updateAudiopacket("PersonB", Convert.ToDouble(messageReceived.Arguments[0]), 0.0, 0, 0.0);
                     }
-
                 }                
                
-                Console.WriteLine("Audio Affect Recieved!");
+                print("Audio Affect Recieved!");
             };
 
             var Audiolistener = new UDPListener(55556, Audiocallback);
-
-            Console.WriteLine("Press any key to stop receiving");
-            Console.ReadLine();
-           listener.Close();
-           Audiolistener.Close();
+            
+            // TODO: Close everything.
+            print("Press any key to stop receiving");
+            //Console.ReadLine();
+            //listener.Close();
+            //Audiolistener.Close();
         }
         public void updateAudiopacket(string person, double individualsTime, double totalTime, int numberOfInterruptions, double maxValue)
         {
-             PersonAudioPacket personAudioPacket = new PersonAudioPacket(person, individualsTime, totalTime, numberOfInterruptions, maxValue);
+            PersonAudioPacket personAudioPacket = new PersonAudioPacket(person, individualsTime, totalTime, numberOfInterruptions, maxValue);
             audioPacket.add(personAudioPacket);
-            Console.WriteLine(audioPacket.ToString());
+            print(audioPacket.ToString());
             audioPacket = new AudioPacket();  
         }
 
@@ -105,6 +104,11 @@ namespace Model
                 ms.Position = 0;
                 return new BinaryFormatter().Deserialize(ms);
             }
+        }
+
+        public void print(String text)
+        {
+            model.print(text);
         }
     }
 }

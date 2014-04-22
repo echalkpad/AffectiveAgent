@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class AudioPacket
+    public class AudioPacket
     {
        
         List<PersonAudioPacket> personAudioPackets;

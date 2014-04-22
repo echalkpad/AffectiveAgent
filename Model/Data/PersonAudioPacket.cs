@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class PersonAudioPacket
+    public class PersonAudioPacket
     {
         string person;
         double individualsTime;
