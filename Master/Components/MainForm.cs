@@ -1,4 +1,4 @@
-﻿using Model.Components;
+﻿using Master.Components;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ZedGraph;
 
-namespace Model
+namespace Master
 {
     public partial class MainForm : Form
     {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZedGraph;
 
-namespace Model.Components
+namespace Master.Components
 {
     public class GraphController
     {

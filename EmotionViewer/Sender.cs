@@ -1,5 +1,4 @@
 ﻿using SharpOSC;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using Master;
 
 namespace EmotionViewer
 {

@@ -1,4 +1,4 @@
-﻿namespace Model
+﻿namespace Master
 {
     partial class MainForm
     {

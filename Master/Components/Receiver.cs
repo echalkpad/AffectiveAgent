@@ -10,9 +10,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using Model.Data;
+using Master.Data;
 
-namespace Model
+namespace Master
 {
     public class Receiver
     {

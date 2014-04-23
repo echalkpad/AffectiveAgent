@@ -9,7 +9,7 @@ using System.IO.Ports;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Model
+namespace Master
 {
     class Program
     {

@@ -1,4 +1,4 @@
-﻿using Model.Data;
+﻿using Master.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Model
+namespace Master
 {
     public class Model
     {
