@@ -8,8 +8,8 @@
     <ProjectGuid>{C42F9346-5D29-46D0-AE79-8C05365A908D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EmotionViewer.cs</RootNamespace>
-    <AssemblyName>emotion_viewer.cs</AssemblyName>
+    <RootNamespace>EmotionViewer</RootNamespace>
+    <AssemblyName>EmotionViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -171,9 +171,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
+    <ProjectReference Include="..\Model\Master.csproj">
       <Project>{b9e2e22b-0ae1-440f-8aff-160f44732664}</Project>
-      <Name>Model</Name>
+      <Name>Master</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

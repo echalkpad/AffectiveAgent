@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmotionViewer", "emotion_viewer.cs\EmotionViewer.csproj", "{C42F9346-5D29-46D0-AE79-8C05365A908D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{B9E2E22B-0AE1-440F-8AFF-160F44732664}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Master", "Model\Master.csproj", "{B9E2E22B-0AE1-440F-8AFF-160F44732664}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A0C1EEC-45BF-44CF-9FD6-0D87D5C43102}"
 EndProject
