@@ -51,5 +51,21 @@ namespace Model
             info.AddValue("audioPackets", audioPackets);
         }
 
+        public String ToString()
+        {
+            String output = "Person: " + label + "\r\n";
+            output += "Audiopackets: \r\n";
+            foreach (AudioPacket audioPacket in audioPackets)
+            {
+                output += "\tAudiopacket: " + audioPacket.ToString() + "\r\n";
+            }
+            output += "Videopackets: \r\n";
+            foreach (VideoPacket videoPacket in videoPackets)
+            {
+                output += "\tVideopacket: " + videoPacket.ToString() + "\r\n";
+            }
+            return output;
+        }
+
     }
 }

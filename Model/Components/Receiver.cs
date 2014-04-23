@@ -44,6 +44,7 @@ namespace Model
                 var messageReceived = (OscMessage)packet;
                 String message = messageReceived.Arguments[0].ToString();
                 VideoPacket videoPacket = (VideoPacket)Serializer.StringToObject(message);
+                model.addVideoPacket(videoPacket);
                 print(videoPacket.ToString());
                 print("Video Affect Recieved!");
             };
@@ -88,6 +89,8 @@ namespace Model
                     }
                 }
 
+                model.addAudioPacket(audioPacket);
+                print(audioPacket.ToString());
                 print("Audio Affect Recieved!");
             };
 

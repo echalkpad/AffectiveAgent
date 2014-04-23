@@ -65,14 +65,34 @@ namespace Model
             mainForm.print(text);
         }
 
-        public void saveData()
+        public void addVideoPacket(VideoPacket videoPacket)
         {
-            print(Serializer.ObjectToString(persons));
+            Person person = getPersonA();
+            person.addVideoPacket(videoPacket);
+            updateDataOutput();
         }
 
-        public void loadData()
+        public void addAudioPacket(AudioPacket audioPacket)
         {
+            Person person = getPersonA();
+            person.addAudioPacket(audioPacket);
+            updateDataOutput();
+        }
 
+        public void updateDataOutput()
+        {
+            mainForm.updateDataOutput();
+        }
+
+        public void loadData(String text)
+        {
+            persons = (List<Person>) Serializer.StringToObject(text);
+            updateDataOutput();
+        }
+
+        public String saveData()
+        {
+            return Serializer.ObjectToString(persons);
         }
     }
 }

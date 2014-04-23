@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.outputTextbox = new System.Windows.Forms.TextBox();
             this.outputLabel = new System.Windows.Forms.Label();
+            this.showDataRadioButton = new System.Windows.Forms.RadioButton();
+            this.showConsoleRadioButton = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog.FileName = "openFileDialog";
             // 
             // loadButton
             // 
@@ -65,6 +67,7 @@
             this.outputTextbox.Location = new System.Drawing.Point(13, 29);
             this.outputTextbox.Multiline = true;
             this.outputTextbox.Name = "outputTextbox";
+            this.outputTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.outputTextbox.Size = new System.Drawing.Size(285, 371);
             this.outputTextbox.TabIndex = 2;
             // 
@@ -77,11 +80,38 @@
             this.outputLabel.TabIndex = 3;
             this.outputLabel.Text = "Output:";
             // 
+            // showDataRadioButton
+            // 
+            this.showDataRadioButton.AutoSize = true;
+            this.showDataRadioButton.Location = new System.Drawing.Point(222, 11);
+            this.showDataRadioButton.Name = "showDataRadioButton";
+            this.showDataRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.showDataRadioButton.TabIndex = 4;
+            this.showDataRadioButton.TabStop = true;
+            this.showDataRadioButton.Text = "Show data";
+            this.showDataRadioButton.UseVisualStyleBackColor = true;
+            this.showDataRadioButton.CheckedChanged += new System.EventHandler(this.showDataRadioButton_CheckedChanged);
+            // 
+            // showConsoleRadioButton
+            // 
+            this.showConsoleRadioButton.AutoSize = true;
+            this.showConsoleRadioButton.Checked = true;
+            this.showConsoleRadioButton.Location = new System.Drawing.Point(124, 11);
+            this.showConsoleRadioButton.Name = "showConsoleRadioButton";
+            this.showConsoleRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.showConsoleRadioButton.TabIndex = 5;
+            this.showConsoleRadioButton.TabStop = true;
+            this.showConsoleRadioButton.Text = "Show console";
+            this.showConsoleRadioButton.UseVisualStyleBackColor = true;
+            this.showConsoleRadioButton.CheckedChanged += new System.EventHandler(this.showConsoleRadioButton_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(613, 412);
+            this.Controls.Add(this.showConsoleRadioButton);
+            this.Controls.Add(this.showDataRadioButton);
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.outputTextbox);
             this.Controls.Add(this.saveButton);
@@ -95,12 +125,14 @@
 
         #endregion
 
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.TextBox outputTextbox;
         private System.Windows.Forms.Label outputLabel;
+        private System.Windows.Forms.RadioButton showDataRadioButton;
+        private System.Windows.Forms.RadioButton showConsoleRadioButton;
 
     }
 }

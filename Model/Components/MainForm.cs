@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -27,11 +28,26 @@ namespace Model
             print("test2");
         }
 
+        public void updateDataOutput()
+        {
+            if (showDataRadioButton.Checked)
+            {
+                print("");
+            }
+        }
+
         public void print(String text)
         {
-            text += "\r\n";
-            this.thread = new Thread(new ThreadStart(this.ThreadProcSafe));
+            if (showConsoleRadioButton.Checked)
+            {
+                text = outputTextbox.Text + text + "\r\n";
+            }
+            else
+            {
+                text = model.getPerson(0).ToString() + "\r\n\r\n" + model.getPerson(1).ToString();
+            }
 
+            this.thread = new Thread(new ThreadStart(this.ThreadProcSafe));
             this.thread.Start();
             if (outputTextbox.InvokeRequired)
             {
@@ -40,8 +56,14 @@ namespace Model
             }
             else
             {
-                outputTextbox.AppendText(text);
+                outputTextbox.Text = text;
             }
+        }
+
+        public void printError(String text)
+        {
+            showConsoleRadioButton.Checked = true;
+            print(text);
         }
 
         // This method is executed on the worker thread and makes 
@@ -52,14 +74,43 @@ namespace Model
 
         private void loadButton_Click(object sender, EventArgs e)
         {
-            model.loadData();
+            try
+            {
+                StreamReader reader = new StreamReader("sample.txt");
+                String text = reader.ReadToEnd();
+                model.loadData(text);
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                printError("Loading failed. Exception: \r\n" + ex.Message);
+            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            model.saveData();
+            String text = model.saveData();
+            try
+            {
+                StreamWriter writer = new StreamWriter("sample.txt");
+                writer.Write(text);
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                printError("Saving failed. Exception: \r\n" + ex.Message);
+            }
         }
 
+        private void showDataRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            outputTextbox.Clear();
+            updateDataOutput();
+        }
 
+        private void showConsoleRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            outputTextbox.Clear();
+        }
     }
 }
