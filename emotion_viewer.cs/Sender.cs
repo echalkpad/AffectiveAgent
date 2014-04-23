@@ -15,17 +15,21 @@ namespace EmotionViewer
     {
         Stopwatch timer = new Stopwatch();
         List<int> valenceList = new List<int>();
-        string personName;
+        int person = 0;
         VideoPacket packet;
 
         private string[] EmotionLabels = { "ANGER", "CONTEMPT", "DISGUST", "FEAR", "JOY", "SADNESS", "SURPRISE" };
         private string[] SentimentLabels = { "NEGATIVE", "POSITIVE", "NEUTRAL" };
 
-        public Sender(string personName)
+        public Sender()
         {
             timer.Start();
-            this.personName = personName;
-            packet = new VideoPacket(personName);
+            packet = new VideoPacket(person);
+        }
+
+        public void setPerson(int person)
+        {
+            this.person = person;
         }
 
         public void update(string emotion, float emotionIntensity, string valence, float valenceIntensity)
@@ -53,7 +57,7 @@ namespace EmotionViewer
                 TransmitData(packet);
                 valenceList.Clear();
 
-                packet = new VideoPacket(personName);
+                packet = new VideoPacket(person);
 
                 // reset and start timer
                 timer.Reset();

@@ -22,7 +22,7 @@ namespace EmotionViewer
     
     public partial class MainForm : Form
     {
-        Main emotionViewer;
+        Main main;
 
         private PXCMSession session;
         private volatile bool closing = false;
@@ -36,9 +36,9 @@ namespace EmotionViewer
         public int NUM_EMOTIONS  = 10;
         public int NUM_PRIMARY_EMOTIONS = 7;
 
-        public MainForm(Main emotionViewer, PXCMSession session)
+        public MainForm(Main main, PXCMSession session)
         {
-            this.emotionViewer = emotionViewer;
+            this.main = main;
 
             InitializeComponent();
 
@@ -48,6 +48,7 @@ namespace EmotionViewer
 
             FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
             Panel2.Paint += new PaintEventHandler(Panel_Paint);
+            personListBox.SelectedIndex = 0;
         }
         
         
@@ -383,12 +384,17 @@ namespace EmotionViewer
 
         private Sender getSender()
         {
-            return emotionViewer.getSender();
+            return main.getSender();
         }
        
         public string GetFileName()
         {
             return filename;
+        }
+
+        private void personListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            main.getSender().setPerson(personListBox.SelectedIndex);
         }
     }
 }

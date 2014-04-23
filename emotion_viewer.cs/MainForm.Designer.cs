@@ -45,6 +45,7 @@
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.Scale2 = new System.Windows.Forms.CheckBox();
             this.Panel2 = new System.Windows.Forms.PictureBox();
+            this.personListBox = new System.Windows.Forms.ListBox();
             this.MainMenu.SuspendLayout();
             this.Status2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Panel2)).BeginInit();
@@ -114,14 +115,14 @@
             this.simpleToolStripMenuItem.Checked = true;
             this.simpleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.simpleToolStripMenuItem.Name = "simpleToolStripMenuItem";
-            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.simpleToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.simpleToolStripMenuItem.Text = "Simple";
             this.simpleToolStripMenuItem.Click += new System.EventHandler(this.simpleToolStripMenuItem_Click);
             // 
             // advancedToolStripMenuItem
             // 
             this.advancedToolStripMenuItem.Name = "advancedToolStripMenuItem";
-            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.advancedToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.advancedToolStripMenuItem.Text = "Advanced";
             this.advancedToolStripMenuItem.Click += new System.EventHandler(this.advancedToolStripMenuItem_Click);
             // 
@@ -158,15 +159,15 @@
             this.Record.Text = "Record";
             this.Record.Click += new System.EventHandler(this.Record_Click);
             // 
-            // Location
+            // LocationCheckBox
             // 
-            this.LocationCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.LocationCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LocationCheckBox.AutoSize = true;
             this.LocationCheckBox.Checked = true;
             this.LocationCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.LocationCheckBox.Location = new System.Drawing.Point(577, 53);
-            this.LocationCheckBox.Name = "Location";
+            this.LocationCheckBox.Name = "LocationCheckBox";
             this.LocationCheckBox.Size = new System.Drawing.Size(67, 17);
             this.LocationCheckBox.TabIndex = 19;
             this.LocationCheckBox.Text = "Location";
@@ -204,9 +205,9 @@
             // 
             // Panel2
             // 
-            this.Panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Panel2.ErrorImage = null;
             this.Panel2.InitialImage = null;
@@ -216,11 +217,24 @@
             this.Panel2.TabIndex = 27;
             this.Panel2.TabStop = false;
             // 
+            // personListBox
+            // 
+            this.personListBox.FormattingEnabled = true;
+            this.personListBox.Items.AddRange(new object[] {
+            "Person A",
+            "Person B"});
+            this.personListBox.Location = new System.Drawing.Point(578, 285);
+            this.personListBox.Name = "personListBox";
+            this.personListBox.Size = new System.Drawing.Size(79, 30);
+            this.personListBox.TabIndex = 28;
+            this.personListBox.SelectedIndexChanged += new System.EventHandler(this.personListBox_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(666, 463);
+            this.Controls.Add(this.personListBox);
             this.Controls.Add(this.Panel2);
             this.Controls.Add(this.Scale2);
             this.Controls.Add(this.Status2);
@@ -263,5 +277,6 @@
         private System.Windows.Forms.ToolStripMenuItem Live;
         private System.Windows.Forms.ToolStripMenuItem Playback;
         private System.Windows.Forms.ToolStripMenuItem Record;
+        private System.Windows.Forms.ListBox personListBox;
     }
 }

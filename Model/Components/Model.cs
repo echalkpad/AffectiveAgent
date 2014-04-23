@@ -36,6 +36,21 @@ namespace Model
             Application.Run(this.mainForm);
         }
 
+        public List<Person> getPersons()
+        {
+            return persons;
+        }
+
+        public Interpreter getInterpreter()
+        {
+            return interpreter;
+        }
+
+        public COM getCOM()
+        {
+            return com;
+        }
+
         public Person getPersonA()
         {
             return persons[0];
@@ -48,18 +63,24 @@ namespace Model
 
         public Person getPerson(int index)
         {
+            if (index >= persons.Count)
+            {
+                printError("The person with index " + index + " does not exist");
+                return null;
+            }
             return persons[index];
         }
 
-        public Interpreter getInterpreter()
+        public Person getPerson(AudioPacket audioPacket)
         {
-            return interpreter;
+            return getPerson(audioPacket.person);
         }
 
-        public COM getCOM()
+        public Person getPerson(VideoPacket videoPacket)
         {
-            return com;
+            return getPerson(videoPacket.person);
         }
+
 
         public void print(String text)
         {
@@ -73,15 +94,13 @@ namespace Model
 
         public void addVideoPacket(VideoPacket videoPacket)
         {
-            Person person = getPersonA();
-            person.addVideoPacket(videoPacket);
+            getPerson(videoPacket).addVideoPacket(videoPacket);
             updateDataOutput();
         }
 
         public void addAudioPacket(AudioPacket audioPacket)
         {
-            Person person = getPersonA();
-            person.addAudioPacket(audioPacket);
+            getPerson(audioPacket).addAudioPacket(audioPacket);
             updateDataOutput();
         }
 

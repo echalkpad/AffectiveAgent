@@ -10,20 +10,27 @@ namespace Model
     [Serializable()]
     public class VideoPacket : ISerializable
     {
-        string person;
-        List<VideoFrame> videoFrames;
+        public int person;
+        public DateTime time = DateTime.Now;
+        public List<VideoFrame> videoFrames;
 
-        public VideoPacket(string person)
+        public VideoPacket(int person)
         {
             this.person = person;
             this.videoFrames = new List<VideoFrame>();
+        }
+
+        public void addVideoFrame(VideoFrame videoFrame)
+        {
+            videoFrames.Add(videoFrame);
         }
 
         //Deserialization constructor.
         public VideoPacket(SerializationInfo info, StreamingContext ctxt)
         {
             //Get the values from info and assign them to the appropriate properties
-            person = (String)info.GetValue("person", typeof(String));
+            person = (int)info.GetValue("person", typeof(int));
+            time = (DateTime)info.GetValue("time", typeof(DateTime));
             videoFrames = (List<VideoFrame>)info.GetValue("videoFrames", typeof(List<VideoFrame>));
         }
         
@@ -34,22 +41,13 @@ namespace Model
             // read the values with the same name. For ex:- If you write EmpId as "EmployeeId"
             // then you should read the same with "EmployeeId"
             info.AddValue("person", person);
+            info.AddValue("time", time);
             info.AddValue("videoFrames", videoFrames);
-        }
-
-        public void addVideoFrame(VideoFrame videoFrame)
-        {
-            videoFrames.Add(videoFrame);
-        }
-
-        public string getPerson()
-        {
-            return person;
         }
 
         public override string ToString()
         {
-            string str = "VideoPacket<" + person + ", List<";
+            string str = "VideoPacket<" + person + ", " + time.ToString() + ", List<";
             foreach (VideoFrame frame in videoFrames)
             {
                 str += "(" + frame.ToString() + ")";

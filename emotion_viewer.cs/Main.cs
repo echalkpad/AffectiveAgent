@@ -15,7 +15,7 @@ namespace EmotionViewer
         public Main()
         {
             // TODO: Make it possible to adjust the name of the person
-            this.sender = new Sender("PersonA");
+            this.sender = new Sender();
 
             // Start up main form
             Application.EnableVisualStyles();

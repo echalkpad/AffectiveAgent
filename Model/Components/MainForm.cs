@@ -23,9 +23,6 @@ namespace Model
             InitializeComponent();
 
             this.model = model;
-
-            print("test1");
-            print("test2");
         }
 
         public void updateDataOutput()
