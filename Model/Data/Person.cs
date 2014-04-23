@@ -10,9 +10,9 @@ namespace Model
     [Serializable()]
     public class Person : ISerializable
     {
-        string label;
-        List<VideoPacket> videoPackets;
-        List<AudioPacket> audioPackets;
+        public string label;
+        public List<VideoPacket> videoPackets;
+        public List<AudioPacket> audioPackets;
 
         public Person(string label)
         {

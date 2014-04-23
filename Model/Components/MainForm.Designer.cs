@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openButton = new System.Windows.Forms.Button();
@@ -36,6 +37,8 @@
             this.outputLabel = new System.Windows.Forms.Label();
             this.showDataRadioButton = new System.Windows.Forms.RadioButton();
             this.showConsoleRadioButton = new System.Windows.Forms.RadioButton();
+            this.graphControl = new ZedGraph.ZedGraphControl();
+            this.drawButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -49,7 +52,7 @@
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(526, 13);
+            this.openButton.Location = new System.Drawing.Point(12, 406);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(75, 23);
             this.openButton.TabIndex = 0;
@@ -59,7 +62,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(525, 43);
+            this.saveButton.Location = new System.Drawing.Point(93, 406);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 1;
@@ -110,11 +113,37 @@
             this.showConsoleRadioButton.UseVisualStyleBackColor = true;
             this.showConsoleRadioButton.CheckedChanged += new System.EventHandler(this.showConsoleRadioButton_CheckedChanged);
             // 
+            // graphControl
+            // 
+            this.graphControl.Location = new System.Drawing.Point(305, 29);
+            this.graphControl.Name = "graphControl";
+            this.graphControl.ScrollGrace = 0D;
+            this.graphControl.ScrollMaxX = 0D;
+            this.graphControl.ScrollMaxY = 0D;
+            this.graphControl.ScrollMaxY2 = 0D;
+            this.graphControl.ScrollMinX = 0D;
+            this.graphControl.ScrollMinY = 0D;
+            this.graphControl.ScrollMinY2 = 0D;
+            this.graphControl.Size = new System.Drawing.Size(464, 371);
+            this.graphControl.TabIndex = 6;
+            // 
+            // drawButton
+            // 
+            this.drawButton.Location = new System.Drawing.Point(305, 405);
+            this.drawButton.Name = "drawButton";
+            this.drawButton.Size = new System.Drawing.Size(75, 23);
+            this.drawButton.TabIndex = 7;
+            this.drawButton.Text = "Draw!";
+            this.drawButton.UseVisualStyleBackColor = true;
+            this.drawButton.Click += new System.EventHandler(this.drawButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(613, 412);
+            this.ClientSize = new System.Drawing.Size(794, 458);
+            this.Controls.Add(this.drawButton);
+            this.Controls.Add(this.graphControl);
             this.Controls.Add(this.showConsoleRadioButton);
             this.Controls.Add(this.showDataRadioButton);
             this.Controls.Add(this.outputLabel);
@@ -138,6 +167,8 @@
         private System.Windows.Forms.Label outputLabel;
         private System.Windows.Forms.RadioButton showDataRadioButton;
         private System.Windows.Forms.RadioButton showConsoleRadioButton;
+        private ZedGraph.ZedGraphControl graphControl;
+        private System.Windows.Forms.Button drawButton;
 
     }
 }

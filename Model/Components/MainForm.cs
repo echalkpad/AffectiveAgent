@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Components;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,12 +10,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ZedGraph;
 
 namespace Model
 {
     public partial class MainForm : Form
     {
         Model model;
+        GraphController graphController;
         delegate void SetTextCallback(string text);
         private Thread thread;
 
@@ -23,6 +26,7 @@ namespace Model
             InitializeComponent();
 
             this.model = model;
+            this.graphController = new GraphController(graphControl);
         }
 
         public void updateDataOutput()
@@ -98,6 +102,13 @@ namespace Model
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
             model.saveData(saveFileDialog.FileName);
+        }
+
+        private void drawButton_Click(object sender, EventArgs e)
+        {
+            List<AudioPacket> packets1 = model.getPersonA().audioPackets;
+            List<AudioPacket> packets2 = model.getPersonB().audioPackets;
+            graphController.test(packets1, packets2);
         }
     }
 }

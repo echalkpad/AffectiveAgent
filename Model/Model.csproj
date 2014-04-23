@@ -47,8 +47,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>lib\ZedGraph\ZedGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="ZedGraph.Web">
+      <HintPath>lib\ZedGraph\ZedGraph.Web.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\GraphController.cs" />
     <Compile Include="Data\AudioPacket.cs" />
     <Compile Include="Components\COM.cs" />
     <Compile Include="Components\Interpreter.cs" />
