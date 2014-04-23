@@ -30,7 +30,7 @@
         {
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.loadButton = new System.Windows.Forms.Button();
+            this.openButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.outputTextbox = new System.Windows.Forms.TextBox();
             this.outputLabel = new System.Windows.Forms.Label();
@@ -41,16 +41,21 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
             // 
-            // loadButton
+            // saveFileDialog
             // 
-            this.loadButton.Location = new System.Drawing.Point(526, 13);
-            this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(75, 23);
-            this.loadButton.TabIndex = 0;
-            this.loadButton.Text = "Load";
-            this.loadButton.UseVisualStyleBackColor = true;
-            this.loadButton.Click += new System.EventHandler(this.loadButton_Click);
+            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+            // 
+            // openButton
+            // 
+            this.openButton.Location = new System.Drawing.Point(526, 13);
+            this.openButton.Name = "openButton";
+            this.openButton.Size = new System.Drawing.Size(75, 23);
+            this.openButton.TabIndex = 0;
+            this.openButton.Text = "Open";
+            this.openButton.UseVisualStyleBackColor = true;
+            this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // saveButton
             // 
@@ -115,7 +120,7 @@
             this.Controls.Add(this.outputLabel);
             this.Controls.Add(this.outputTextbox);
             this.Controls.Add(this.saveButton);
-            this.Controls.Add(this.loadButton);
+            this.Controls.Add(this.openButton);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -127,7 +132,7 @@
 
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
-        private System.Windows.Forms.Button loadButton;
+        private System.Windows.Forms.Button openButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.TextBox outputTextbox;
         private System.Windows.Forms.Label outputLabel;

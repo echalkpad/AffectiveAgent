@@ -13,6 +13,7 @@ namespace Model
 {
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             Model model = new Model();

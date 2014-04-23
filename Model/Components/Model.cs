@@ -1,6 +1,7 @@
 ﻿using Model.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,11 @@ namespace Model
             mainForm.print(text);
         }
 
+        public void printError(String text)
+        {
+            mainForm.printError(text);
+        }
+
         public void addVideoPacket(VideoPacket videoPacket)
         {
             Person person = getPersonA();
@@ -84,15 +90,35 @@ namespace Model
             mainForm.updateDataOutput();
         }
 
-        public void loadData(String text)
+        public void openData(String filename)
         {
-            persons = (List<Person>) Serializer.StringToObject(text);
+            try
+            {
+                StreamReader reader = new StreamReader(filename);
+                String text = reader.ReadToEnd();
+                persons = (List<Person>)Serializer.StringToObject(text);
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                printError("Loading failed. Exception: \r\n" + ex.Message);
+            }
             updateDataOutput();
         }
 
-        public String saveData()
+        public void saveData(String filename)
         {
-            return Serializer.ObjectToString(persons);
+            String text = Serializer.ObjectToString(persons);
+            try
+            {
+                StreamWriter writer = new StreamWriter(filename);
+                writer.Write(text);
+                writer.Close();
+            }
+            catch (Exception ex)
+            {
+                printError("Saving failed. Exception: \r\n" + ex.Message);
+            }
         }
     }
 }

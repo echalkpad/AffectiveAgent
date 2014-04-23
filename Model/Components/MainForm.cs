@@ -72,34 +72,14 @@ namespace Model
         {
         }
 
-        private void loadButton_Click(object sender, EventArgs e)
+        private void openButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                StreamReader reader = new StreamReader("sample.txt");
-                String text = reader.ReadToEnd();
-                model.loadData(text);
-                reader.Close();
-            }
-            catch (Exception ex)
-            {
-                printError("Loading failed. Exception: \r\n" + ex.Message);
-            }
+            openFileDialog.ShowDialog();
         }
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            String text = model.saveData();
-            try
-            {
-                StreamWriter writer = new StreamWriter("sample.txt");
-                writer.Write(text);
-                writer.Close();
-            }
-            catch (Exception ex)
-            {
-                printError("Saving failed. Exception: \r\n" + ex.Message);
-            }
+            saveFileDialog.ShowDialog();
         }
 
         private void showDataRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -111,6 +91,16 @@ namespace Model
         private void showConsoleRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             outputTextbox.Clear();
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            model.openData(openFileDialog.FileName);
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            model.saveData(saveFileDialog.FileName);
         }
     }
 }
