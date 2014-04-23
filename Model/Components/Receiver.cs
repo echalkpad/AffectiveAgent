@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using Model.Data;
 
 namespace Model
 {
@@ -18,10 +19,23 @@ namespace Model
         Model model;
         AudioPacket audioPacket;
 
+        UDPListener videolistener, audiolistener;
+
         public Receiver(Model model)
         {
             this.model = model;
-            print("test3");
+        }
+
+        public void updateAudiopacket(string person, double individualsTime, double totalTime, int numberOfInterruptions, double maxValue)
+        {
+            PersonAudioPacket personAudioPacket = new PersonAudioPacket(person, individualsTime, totalTime, numberOfInterruptions, maxValue);
+            audioPacket.add(personAudioPacket);
+            print(audioPacket.ToString());
+            audioPacket = new AudioPacket();  
+        }
+
+        public void start()
+        {
             audioPacket = new AudioPacket();
 
             // The video cabllback function
@@ -29,12 +43,12 @@ namespace Model
             {
                 var messageReceived = (OscMessage)packet;
                 String message = messageReceived.Arguments[0].ToString();
-                VideoPacket videoPacket = (VideoPacket)StringToObject(message);
+                VideoPacket videoPacket = (VideoPacket)Serializer.StringToObject(message);
                 print(videoPacket.ToString());
                 print("Video Affect Recieved!");
             };
 
-            var listener = new UDPListener(55555, callback);
+            videolistener = new UDPListener(55555, callback);
 
             // Audio Reciever
             HandleOscPacket Audiocallback = delegate(OscPacket packet)
@@ -45,11 +59,9 @@ namespace Model
                 {
                     updateAudiopacket("PersonA", 0.0, Convert.ToDouble(messageReceived.Arguments[0]), 0, 0.0);
                     updateAudiopacket("PersonB", 0.0, Convert.ToDouble(messageReceived.Arguments[0]), 0, 0.0);
-
                 }
                 else
                 {
-
                     if (messageReceived.Address == "/speaker1/volume")
                     {
                         updateAudiopacket("PersonA", 0.0, 0.0, 0, Convert.ToDouble(messageReceived.Arguments[0]));
@@ -74,36 +86,21 @@ namespace Model
                     {
                         updateAudiopacket("PersonB", Convert.ToDouble(messageReceived.Arguments[0]), 0.0, 0, 0.0);
                     }
-                }                
-               
+                }
+
                 print("Audio Affect Recieved!");
             };
 
-            var Audiolistener = new UDPListener(55556, Audiocallback);
-            
-            // TODO: Close everything.
+            audiolistener = new UDPListener(55556, Audiocallback);
+
             print("Press any key to stop receiving");
-            //Console.ReadLine();
-            //listener.Close();
-            //Audiolistener.Close();
-        }
-        public void updateAudiopacket(string person, double individualsTime, double totalTime, int numberOfInterruptions, double maxValue)
-        {
-            PersonAudioPacket personAudioPacket = new PersonAudioPacket(person, individualsTime, totalTime, numberOfInterruptions, maxValue);
-            audioPacket.add(personAudioPacket);
-            print(audioPacket.ToString());
-            audioPacket = new AudioPacket();  
         }
 
-        public object StringToObject(string base64String)
+        public void stop()
         {
-            byte[] bytes = Convert.FromBase64String(base64String);
-            using (MemoryStream ms = new MemoryStream(bytes, 0, bytes.Length))
-            {
-                ms.Write(bytes, 0, bytes.Length);
-                ms.Position = 0;
-                return new BinaryFormatter().Deserialize(ms);
-            }
+            videolistener.Close();
+            audiolistener.Close();
+
         }
 
         public void print(String text)

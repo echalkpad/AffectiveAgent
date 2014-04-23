@@ -49,5 +49,17 @@ namespace Model
         private void ThreadProcSafe()
         {
         }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            model.loadData();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            model.saveData();
+        }
+
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,7 @@ namespace Model
 {
     public class Model
     {
-        Person personA;
-        Person personB;
+        List<Person> persons = new List<Person>();
         Receiver receiver;
         Interpreter interpreter;
         COM com;
@@ -24,9 +24,10 @@ namespace Model
             this.mainForm = new MainForm(this);
 
             // Initialize other components
-            personA = new Person("A");
-            personB = new Person("B");
+            persons.Add(new Person("A"));
+            persons.Add(new Person("B"));
             receiver = new Receiver(this);
+            receiver.start();
             interpreter = new Interpreter(this);
             com = new COM(this);
 
@@ -36,12 +37,17 @@ namespace Model
 
         public Person getPersonA()
         {
-            return personA;
+            return persons[0];
         }
 
         public Person getPersonB()
         {
-            return personB;
+            return persons[1];
+        }
+
+        public Person getPerson(int index)
+        {
+            return persons[index];
         }
 
         public Interpreter getInterpreter()
@@ -59,5 +65,14 @@ namespace Model
             mainForm.print(text);
         }
 
+        public void saveData()
+        {
+            print(Serializer.ObjectToString(persons));
+        }
+
+        public void loadData()
+        {
+
+        }
     }
 }
