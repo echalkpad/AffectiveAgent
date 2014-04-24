@@ -106,9 +106,47 @@ namespace Master
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            List<AudioPacket> packets1 = model.getPersonA().audioPackets;
-            List<AudioPacket> packets2 = model.getPersonB().audioPackets;
-            graphController.test(packets1, packets2);
+            if (PacketListBox.SelectedIndex == 0)
+            {
+                List<AudioPacket> packets1 = model.getPersonA().audioPackets;
+                List<AudioPacket> packets2 = model.getPersonB().audioPackets;
+                graphController.CreateGraph(packets1, packets2, featureListBox.SelectedIndex);
+            }
+            else if (PacketListBox.SelectedIndex == 1)
+            {
+                List<VideoFrame> packets1 = new List<VideoFrame>();
+                foreach (VideoPacket packet in model.getPersonA().videoPackets)
+                {
+                    foreach (VideoFrame frame in packet.videoFrames)
+                        packets1.Add(frame);
+                }
+
+                List<VideoFrame> packets2 = new List<VideoFrame>();
+                foreach (VideoPacket packet in model.getPersonB().videoPackets)
+                {
+                    foreach (VideoFrame frame in packet.videoFrames)
+                        packets2.Add(frame);
+                }
+                graphController.CreateGraph(packets1, packets2, featureListBox.SelectedIndex);
+            }
+        }
+
+        private void PacketListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            featureListBox.Items.Clear();
+            if (PacketListBox.SelectedIndex == 0)
+            {
+                featureListBox.Items.Add("Individual's time");
+                featureListBox.Items.Add("Number of interruptions");
+                featureListBox.Items.Add("Maximal value");
+            }
+            else if (PacketListBox.SelectedIndex == 1)
+            {
+                featureListBox.Items.Add("Emotion");
+                featureListBox.Items.Add("Emotion intensity");
+                featureListBox.Items.Add("Valence");
+                featureListBox.Items.Add("Valence intensity");
+            }
         }
     }
 }

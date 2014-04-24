@@ -28,18 +28,129 @@ namespace Master.Components
             lineItem2.Clear();
         }
 
+        public void CreateGraph(List<AudioPacket> packets1, List<AudioPacket> packets2, int featureIndex)
+        {
+            // Clear the graph
+            Clear();
+
+            // Set the Titles
+            graphPane.Title.Text = "My Test Graph\n";
+            graphPane.XAxis.Title.Text = "Time";
+            graphPane.YAxis.Title.Text = "Individuals time";
+
+            // Make up some data arrays based on audio features
+            double x, y1, y2;
+            PointPairList list1 = new PointPairList();
+            PointPairList list2 = new PointPairList();
+            for (int i = 0; i < 36; i++)
+            {
+                x = (double)i + 5;
+
+                if (i >= packets1.Count)
+                    y1 = 0;
+                else
+                    y1 = packets1[i].individualsTime;
+
+                if (i >= packets1.Count)
+                    y2 = 0;
+                else
+                    y2 = packets2[i].individualsTime;
+
+                list1.Add(x, y1);
+                list2.Add(x, y2);
+            }
+
+            // Generate a red curve with diamond
+            // symbols, and "Porsche" in the legend
+            lineItem1.Points = list1;
+
+            // Generate a blue curve with circle symbols, and "Piper" in the legend
+            lineItem2.Points = list2;
+
+            // Tell ZedGraph to refigure the axes since the data have changed
+            graphControl.AxisChange();
+            graphControl.RestoreScale(graphPane);
+        }
+
+        public void CreateGraph(List<VideoFrame> packets1, List<VideoFrame> packets2, int featureIndex)
+        {
+            // Clear the graph
+            Clear();
+
+            // Set the Titles
+            graphPane.Title.Text = "My Test Graph\n";
+            graphPane.XAxis.Title.Text = "Time";
+            graphPane.YAxis.Title.Text = "Emotion";
+
+            // Make up some data arrays based on video features
+            double x, y1 = 0, y2 = 0;
+            PointPairList list1 = new PointPairList();
+            PointPairList list2 = new PointPairList();
+            for (int i = 0; i < 36; i++)
+            {
+                x = (double)i + 5;
+
+                if (i < packets1.Count)
+                {
+                    switch (featureIndex)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            y1 = packets1[i].emotionIntensity;
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            y1 = packets1[i].valenceIntensity;
+                            break;
+                    }
+                }
+
+                if (i < packets1.Count)
+                {
+                    switch (featureIndex)
+                    {
+                        case 0:
+                            break;
+                        case 1:
+                            y1 = packets2[i].emotionIntensity;
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            y1 = packets2[i].valenceIntensity;
+                            break;
+                    }
+                }
+
+                list1.Add(x, y1);
+                list2.Add(x, y2);
+            }
+
+            // Generate a red curve with diamond
+            // symbols, and "Porsche" in the legend
+            lineItem1.Points = list1;
+
+            // Generate a blue curve with circle
+            // symbols, and "Piper" in the legend
+            lineItem2.Points = list2;
+
+            // Tell ZedGraph to refigure the
+            // axes since the data have changed
+            graphControl.AxisChange();
+            graphControl.RestoreScale(graphPane);
+        }
+
         public void test(List<AudioPacket> packets1, List<AudioPacket> packets2)
         {
             // clear the graph
             Clear();
 
-            // get a reference to the GraphPane
-            GraphPane myPane = graphControl.GraphPane;
-
             // Set the Titles
-            myPane.Title.Text = "My Test Graph\n";
-            myPane.XAxis.Title.Text = "Time";
-            myPane.YAxis.Title.Text = "Individuals time";
+            graphPane.Title.Text = "My Test Graph\n";
+            graphPane.XAxis.Title.Text = "Time";
+            graphPane.YAxis.Title.Text = "Individuals time";
 
             // Make up some data arrays based on the Sine function
             double x, y1, y2;
@@ -74,7 +185,7 @@ namespace Master.Components
             // Tell ZedGraph to refigure the
             // axes since the data have changed
             graphControl.AxisChange();
-            graphControl.RestoreScale(myPane);
+            graphControl.RestoreScale(graphPane);
         }
 
 

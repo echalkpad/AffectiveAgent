@@ -10,11 +10,11 @@ namespace Master
     [Serializable()]
     public class VideoFrame : ISerializable
     {
-        long time;
-        string emotion;
-        float emotionIntensity;
-        string valence;
-        float valenceIntensity;
+        public long time;
+        public string emotion;
+        public float emotionIntensity;
+        public string valence;
+        public float valenceIntensity;
 
         public VideoFrame(long time, string emotion, float emotionIntensity, string valence, float valenceIntensity)
         {

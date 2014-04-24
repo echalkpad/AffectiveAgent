@@ -39,6 +39,8 @@
             this.showConsoleRadioButton = new System.Windows.Forms.RadioButton();
             this.graphControl = new ZedGraph.ZedGraphControl();
             this.drawButton = new System.Windows.Forms.Button();
+            this.PacketListBox = new System.Windows.Forms.ListBox();
+            this.featureListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -137,11 +139,33 @@
             this.drawButton.UseVisualStyleBackColor = true;
             this.drawButton.Click += new System.EventHandler(this.drawButton_Click);
             // 
+            // PacketListBox
+            // 
+            this.PacketListBox.FormattingEnabled = true;
+            this.PacketListBox.Items.AddRange(new object[] {
+            "Audio packets",
+            "Video packets"});
+            this.PacketListBox.Location = new System.Drawing.Point(775, 29);
+            this.PacketListBox.Name = "PacketListBox";
+            this.PacketListBox.Size = new System.Drawing.Size(120, 30);
+            this.PacketListBox.TabIndex = 8;
+            this.PacketListBox.SelectedIndexChanged += new System.EventHandler(this.PacketListBox_SelectedIndexChanged);
+            // 
+            // featureListBox
+            // 
+            this.featureListBox.FormattingEnabled = true;
+            this.featureListBox.Location = new System.Drawing.Point(776, 66);
+            this.featureListBox.Name = "featureListBox";
+            this.featureListBox.Size = new System.Drawing.Size(120, 95);
+            this.featureListBox.TabIndex = 9;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 458);
+            this.ClientSize = new System.Drawing.Size(896, 458);
+            this.Controls.Add(this.featureListBox);
+            this.Controls.Add(this.PacketListBox);
             this.Controls.Add(this.drawButton);
             this.Controls.Add(this.graphControl);
             this.Controls.Add(this.showConsoleRadioButton);
@@ -169,6 +193,8 @@
         private System.Windows.Forms.RadioButton showConsoleRadioButton;
         private ZedGraph.ZedGraphControl graphControl;
         private System.Windows.Forms.Button drawButton;
+        private System.Windows.Forms.ListBox PacketListBox;
+        private System.Windows.Forms.ListBox featureListBox;
 
     }
 }
