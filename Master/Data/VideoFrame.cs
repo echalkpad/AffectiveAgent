@@ -11,14 +11,14 @@ namespace Master
     [Serializable()]
     public class VideoFrame : ISerializable
     {        
-        public long time;
+        public DateTime time;
         public Emotion emotion;
         public float emotionIntensity;
         public Valence valence;
 
         public float valenceIntensity;
 
-        public VideoFrame(long time, string emotion, float emotionIntensity, string valence, float valenceIntensity)
+        public VideoFrame(DateTime time, string emotion, float emotionIntensity, string valence, float valenceIntensity)
         {
             this.time = time;
             this.emotion = Constants.ParseEmotion(emotion);
@@ -31,7 +31,7 @@ namespace Master
         public VideoFrame(SerializationInfo info, StreamingContext ctxt)
         {
             //Get the values from info and assign them to the appropriate properties
-            time = (long)info.GetValue("time", typeof(long));
+            time = (DateTime)info.GetValue("time", typeof(DateTime));
             emotion = (Emotion)info.GetValue("emotion", typeof(Emotion));
             emotionIntensity = (float)info.GetValue("emotionIntensity", typeof(float));
             valence = (Valence)info.GetValue("valence", typeof(Valence));

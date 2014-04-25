@@ -45,8 +45,7 @@ namespace EmotionViewer
             if (timer.Elapsed.TotalSeconds < TimeSpan.FromSeconds(3).TotalSeconds)
             {
                 // valenceList.Add(valenceID);
-                long time = DateTime.Now.Ticks;
-                VideoFrame frame = new VideoFrame(time, emotion, emotionIntensity, valence, valenceIntensity);
+                VideoFrame frame = new VideoFrame(DateTime.Now, emotion, emotionIntensity, valence, valenceIntensity);
                 packet.addVideoFrame(frame);
             }
             else
