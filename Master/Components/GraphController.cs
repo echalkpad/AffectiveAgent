@@ -41,37 +41,66 @@ namespace Master.Components
 
             // Set the titles
             graphPane.Title.Text = "Audio packets";
+            graphPane.YAxis.Title.Text = "";
 
-            // Make up some data arrays based on audio features
-            double x, y1, y2;
+            // Make up some data arrays based on video features
             PointPairList list1 = new PointPairList();
             PointPairList list2 = new PointPairList();
-            for (int i = 0; i < 36; i++)
+            DateTime minTime = MinTime(packets1, packets2);
+            for (int i = 0; i < Math.Max(packets1.Count, packets2.Count); i++)
             {
-                //x = (((double)i) / 2d) * (((double)i) / 2d);
-                x = i;
-                if (i >= packets1.Count)
-                    y1 = 0;
-                else
-                    y1 = packets1[i].individualsTime;
+                // Packets of person A
+                if (i < packets1.Count)
+                {
+                    double x1 = ComputeX(minTime, packets1[i].time);
+                    double y1 = 0;
+                    switch (featureIndex)
+                    {
+                        case 0:
+                            graphPane.YAxis.Title.Text = "Individual's time";
+                            y1 = packets1[i].individualsTime;
+                            break;
+                        case 1:
+                            graphPane.YAxis.Title.Text = "Number of interruptions";
+                            y1 = packets1[i].numberOfInterruptions;
+                            break;
+                        case 2:
+                            graphPane.YAxis.Title.Text = "Maximal value";
+                            y1 = packets1[i].maxValue;
+                            break;
+                    }
+                    list1.Add(x1, y1);
+                }
 
-                if (i >= packets1.Count)
-                    y2 = 0;
-                else
-                    y2 = packets2[i].individualsTime;
-
-                list1.Add(x, y1);
-                list2.Add(x, y2);
+                // Packets of person B
+                if (i < packets2.Count)
+                {
+                    double x2 = ComputeX(minTime, packets2[i].time);
+                    double y2 = 0;
+                    switch (featureIndex)
+                    {
+                        case 0:
+                            graphPane.YAxis.Title.Text = "Individual's time";
+                            y2 = packets2[i].individualsTime;
+                            break;
+                        case 1:
+                            graphPane.YAxis.Title.Text = "Number of interruptions";
+                            y2 = packets2[i].numberOfInterruptions;
+                            break;
+                        case 2:
+                            graphPane.YAxis.Title.Text = "Maximal value";
+                            y2 = packets2[i].maxValue;
+                            break;
+                    }
+                    list2.Add(x2, y2);
+                }
             }
 
-            // Generate a red curve with diamond
-            // symbols, and "Porsche" in the legend
+            // Add points
             lineItem1.Points = list1;
-
-            // Generate a blue curve with circle symbols, and "Piper" in the legend
             lineItem2.Points = list2;
 
-            // Tell ZedGraph to refigure the axes since the data have changed
+            // Tell ZedGraph to refigure the axis since the data have changed
             graphControl.AxisChange();
             if (autoScale)
                 graphControl.RestoreScale(graphControl.GraphPane);
@@ -84,6 +113,7 @@ namespace Master.Components
 
             // Set the titles
             graphPane.Title.Text = "Video packets";
+            graphPane.YAxis.Title.Text = "";
 
             // Make up some data arrays based on video features
             PointPairList list1 = new PointPairList();
@@ -91,6 +121,7 @@ namespace Master.Components
             DateTime minTime = MinTime(packets1, packets2);
             for (int i = 0; i < Math.Max(packets1.Count, packets2.Count); i++)
             {
+                // Packets of person A
                 if (i < packets1.Count)
                 {
                     double x1 = ComputeX(minTime, packets1[i].time);
@@ -141,6 +172,7 @@ namespace Master.Components
                     list1.Add(x1, y1);
                 }
 
+                // Packets of person B
                 if (i < packets2.Count)
                 {
                     double x2 = ComputeX(minTime, packets2[i].time);
@@ -176,12 +208,15 @@ namespace Master.Components
                             y2 = ComputeEmotionIntensity(packets2[i], Emotion.SURPRISE);
                             break;
                         case 7:
+                            graphPane.YAxis.Title.Text = "Emotion intensity";
                             y2 = packets2[i].emotionIntensity;
                             break;
                         case 8:
+                            graphPane.YAxis.Title.Text = "Valence";
                             y2 = ComputeValenceIntensity(packets2[i]);
                             break;
                         case 9:
+                            graphPane.YAxis.Title.Text = "Valence intensity";
                             y2 = packets2[i].valenceIntensity;
                             break;
                     }
@@ -189,16 +224,11 @@ namespace Master.Components
                 }
             }
 
-            // Generate a red curve with diamond
-            // symbols, and "Porsche" in the legend
+            // Add points
             lineItem1.Points = list1;
-
-            // Generate a blue curve with circle
-            // symbols, and "Piper" in the legend
             lineItem2.Points = list2;
 
-            // Tell ZedGraph to refigure the
-            // axes since the data have changed
+            // Tell ZedGraph to refigure the axis since the data have changed
             graphControl.AxisChange();
             if (autoScale)
                 graphControl.RestoreScale(graphControl.GraphPane);
