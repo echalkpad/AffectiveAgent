@@ -45,6 +45,7 @@
             this.displayGraphLabel = new System.Windows.Forms.Label();
             this.liveCheckBox = new System.Windows.Forms.CheckBox();
             this.updateGraphTimer = new System.Windows.Forms.Timer(this.components);
+            this.AutoResizeCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -119,6 +120,14 @@
             // 
             // graphControl
             // 
+            this.graphControl.IsEnableHEdit = true;
+            this.graphControl.IsEnableSelection = true;
+            this.graphControl.IsEnableVEdit = true;
+            this.graphControl.IsPrintFillPage = false;
+            this.graphControl.IsPrintKeepAspectRatio = false;
+            this.graphControl.IsPrintScaleAll = false;
+            this.graphControl.IsShowHScrollBar = true;
+            this.graphControl.IsShowVScrollBar = true;
             this.graphControl.Location = new System.Drawing.Point(305, 29);
             this.graphControl.Name = "graphControl";
             this.graphControl.ScrollGrace = 0D;
@@ -133,7 +142,7 @@
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(775, 167);
+            this.drawButton.Location = new System.Drawing.Point(775, 267);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
@@ -158,7 +167,7 @@
             this.featureListBox.FormattingEnabled = true;
             this.featureListBox.Location = new System.Drawing.Point(775, 81);
             this.featureListBox.Name = "featureListBox";
-            this.featureListBox.Size = new System.Drawing.Size(95, 56);
+            this.featureListBox.Size = new System.Drawing.Size(95, 134);
             this.featureListBox.TabIndex = 9;
             this.featureListBox.SelectedIndexChanged += new System.EventHandler(this.featureListBox_SelectedIndexChanged);
             // 
@@ -187,7 +196,9 @@
             // liveCheckBox
             // 
             this.liveCheckBox.AutoSize = true;
-            this.liveCheckBox.Location = new System.Drawing.Point(776, 144);
+            this.liveCheckBox.Checked = true;
+            this.liveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.liveCheckBox.Location = new System.Drawing.Point(775, 244);
             this.liveCheckBox.Name = "liveCheckBox";
             this.liveCheckBox.Size = new System.Drawing.Size(46, 17);
             this.liveCheckBox.TabIndex = 12;
@@ -201,11 +212,25 @@
             this.updateGraphTimer.Interval = 1000;
             this.updateGraphTimer.Tick += new System.EventHandler(this.updateGraphTimer_Tick);
             // 
+            // AutoResizeCheckBox
+            // 
+            this.AutoResizeCheckBox.AutoSize = true;
+            this.AutoResizeCheckBox.Checked = true;
+            this.AutoResizeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 221);
+            this.AutoResizeCheckBox.Name = "AutoResizeCheckBox";
+            this.AutoResizeCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.AutoResizeCheckBox.TabIndex = 13;
+            this.AutoResizeCheckBox.Text = "Auto resize";
+            this.AutoResizeCheckBox.UseVisualStyleBackColor = true;
+            this.AutoResizeCheckBox.CheckedChanged += new System.EventHandler(this.AutoResizeCheckBox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 458);
+            this.Controls.Add(this.AutoResizeCheckBox);
             this.Controls.Add(this.liveCheckBox);
             this.Controls.Add(this.displayGraphLabel);
             this.Controls.Add(this.showNothingRadioButton);
@@ -244,6 +269,7 @@
         private System.Windows.Forms.Label displayGraphLabel;
         private System.Windows.Forms.CheckBox liveCheckBox;
         private System.Windows.Forms.Timer updateGraphTimer;
+        private System.Windows.Forms.CheckBox AutoResizeCheckBox;
 
     }
 }

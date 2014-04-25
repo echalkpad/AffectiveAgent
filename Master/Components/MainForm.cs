@@ -1,4 +1,5 @@
 ﻿using Master.Components;
+using Master.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -168,7 +169,10 @@ namespace Master
             }
             else if (PacketListBox.SelectedIndex == 1)
             {
-                featureListBox.Items.Add("Emotion");
+                foreach (Emotion emotion in Constants.GetEmotions())
+                {
+                    featureListBox.Items.Add(Constants.PrintEmotion(emotion));
+                }
                 featureListBox.Items.Add("Emotion intensity");
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
@@ -209,6 +213,11 @@ namespace Master
             {
                 CreateGraph();
             }
+        }
+
+        private void AutoResizeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            graphController.autoScale = AutoResizeCheckBox.Checked;
         }
     }
 }
