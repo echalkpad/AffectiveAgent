@@ -43,9 +43,13 @@ namespace Master
             {
                 text = outputTextbox.Text + text + "\r\n";
             }
-            else
+            else if (showDataRadioButton.Checked)
             {
                 text = model.getPerson(0).ToString() + "\r\n\r\n" + model.getPerson(1).ToString();
+            }
+            else if (showNothingRadioButton.Checked)
+            {
+                text = text;
             }
 
             this.thread = new Thread(new ThreadStart(this.ThreadProcSafe));
@@ -64,6 +68,7 @@ namespace Master
         public void printError(String text)
         {
             showConsoleRadioButton.Checked = true;
+
             print(text);
         }
 
@@ -147,6 +152,11 @@ namespace Master
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
             }
+        }
+
+        private void showNothingRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            outputTextbox.Clear();
         }
     }
 }

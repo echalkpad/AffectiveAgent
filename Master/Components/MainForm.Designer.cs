@@ -41,6 +41,8 @@
             this.drawButton = new System.Windows.Forms.Button();
             this.PacketListBox = new System.Windows.Forms.ListBox();
             this.featureListBox = new System.Windows.Forms.ListBox();
+            this.showNothingRadioButton = new System.Windows.Forms.RadioButton();
+            this.displayGraphLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -84,7 +86,7 @@
             // outputLabel
             // 
             this.outputLabel.AutoSize = true;
-            this.outputLabel.Location = new System.Drawing.Point(13, 13);
+            this.outputLabel.Location = new System.Drawing.Point(12, 11);
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(42, 13);
             this.outputLabel.TabIndex = 3;
@@ -93,12 +95,12 @@
             // showDataRadioButton
             // 
             this.showDataRadioButton.AutoSize = true;
-            this.showDataRadioButton.Location = new System.Drawing.Point(222, 11);
+            this.showDataRadioButton.Location = new System.Drawing.Point(182, 9);
             this.showDataRadioButton.Name = "showDataRadioButton";
-            this.showDataRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.showDataRadioButton.Size = new System.Drawing.Size(48, 17);
             this.showDataRadioButton.TabIndex = 4;
             this.showDataRadioButton.TabStop = true;
-            this.showDataRadioButton.Text = "Show data";
+            this.showDataRadioButton.Text = "Data";
             this.showDataRadioButton.UseVisualStyleBackColor = true;
             this.showDataRadioButton.CheckedChanged += new System.EventHandler(this.showDataRadioButton_CheckedChanged);
             // 
@@ -106,12 +108,12 @@
             // 
             this.showConsoleRadioButton.AutoSize = true;
             this.showConsoleRadioButton.Checked = true;
-            this.showConsoleRadioButton.Location = new System.Drawing.Point(124, 11);
+            this.showConsoleRadioButton.Location = new System.Drawing.Point(113, 9);
             this.showConsoleRadioButton.Name = "showConsoleRadioButton";
-            this.showConsoleRadioButton.Size = new System.Drawing.Size(92, 17);
+            this.showConsoleRadioButton.Size = new System.Drawing.Size(63, 17);
             this.showConsoleRadioButton.TabIndex = 5;
             this.showConsoleRadioButton.TabStop = true;
-            this.showConsoleRadioButton.Text = "Show console";
+            this.showConsoleRadioButton.Text = "Console";
             this.showConsoleRadioButton.UseVisualStyleBackColor = true;
             this.showConsoleRadioButton.CheckedChanged += new System.EventHandler(this.showConsoleRadioButton_CheckedChanged);
             // 
@@ -131,9 +133,9 @@
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(305, 405);
+            this.drawButton.Location = new System.Drawing.Point(775, 143);
             this.drawButton.Name = "drawButton";
-            this.drawButton.Size = new System.Drawing.Size(75, 23);
+            this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
             this.drawButton.Text = "Draw!";
             this.drawButton.UseVisualStyleBackColor = true;
@@ -145,25 +147,48 @@
             this.PacketListBox.Items.AddRange(new object[] {
             "Audio packets",
             "Video packets"});
-            this.PacketListBox.Location = new System.Drawing.Point(775, 29);
+            this.PacketListBox.Location = new System.Drawing.Point(775, 45);
             this.PacketListBox.Name = "PacketListBox";
-            this.PacketListBox.Size = new System.Drawing.Size(120, 30);
+            this.PacketListBox.Size = new System.Drawing.Size(95, 30);
             this.PacketListBox.TabIndex = 8;
             this.PacketListBox.SelectedIndexChanged += new System.EventHandler(this.PacketListBox_SelectedIndexChanged);
             // 
             // featureListBox
             // 
             this.featureListBox.FormattingEnabled = true;
-            this.featureListBox.Location = new System.Drawing.Point(776, 66);
+            this.featureListBox.Location = new System.Drawing.Point(775, 81);
             this.featureListBox.Name = "featureListBox";
-            this.featureListBox.Size = new System.Drawing.Size(120, 95);
+            this.featureListBox.Size = new System.Drawing.Size(95, 56);
             this.featureListBox.TabIndex = 9;
+            // 
+            // showNothingRadioButton
+            // 
+            this.showNothingRadioButton.AutoSize = true;
+            this.showNothingRadioButton.Location = new System.Drawing.Point(236, 9);
+            this.showNothingRadioButton.Name = "showNothingRadioButton";
+            this.showNothingRadioButton.Size = new System.Drawing.Size(62, 17);
+            this.showNothingRadioButton.TabIndex = 10;
+            this.showNothingRadioButton.TabStop = true;
+            this.showNothingRadioButton.Text = "Nothing";
+            this.showNothingRadioButton.UseVisualStyleBackColor = true;
+            this.showNothingRadioButton.CheckedChanged += new System.EventHandler(this.showNothingRadioButton_CheckedChanged);
+            // 
+            // displayGraphLabel
+            // 
+            this.displayGraphLabel.AutoSize = true;
+            this.displayGraphLabel.Location = new System.Drawing.Point(775, 29);
+            this.displayGraphLabel.Name = "displayGraphLabel";
+            this.displayGraphLabel.Size = new System.Drawing.Size(44, 13);
+            this.displayGraphLabel.TabIndex = 11;
+            this.displayGraphLabel.Text = "Display:";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(896, 458);
+            this.ClientSize = new System.Drawing.Size(883, 458);
+            this.Controls.Add(this.displayGraphLabel);
+            this.Controls.Add(this.showNothingRadioButton);
             this.Controls.Add(this.featureListBox);
             this.Controls.Add(this.PacketListBox);
             this.Controls.Add(this.drawButton);
@@ -195,6 +220,8 @@
         private System.Windows.Forms.Button drawButton;
         private System.Windows.Forms.ListBox PacketListBox;
         private System.Windows.Forms.ListBox featureListBox;
+        private System.Windows.Forms.RadioButton showNothingRadioButton;
+        private System.Windows.Forms.Label displayGraphLabel;
 
     }
 }

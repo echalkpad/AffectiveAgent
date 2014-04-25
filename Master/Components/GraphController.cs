@@ -86,7 +86,7 @@ namespace Master.Components
             double x, y1 = 0, y2 = 0;
             PointPairList list1 = new PointPairList();
             PointPairList list2 = new PointPairList();
-            for (int i = 0; i < 36; i++)
+            for (int i = 0; i < Math.Max(packets1.Count, packets2.Count); i++)
             {
                 x = (double)i + 5;
 
@@ -100,6 +100,7 @@ namespace Master.Components
                             y1 = packets1[i].emotionIntensity;
                             break;
                         case 2:
+                            y1 = ComputeValenceIntensity(packets1[i]);
                             break;
                         case 3:
                             y1 = packets1[i].valenceIntensity;
@@ -107,19 +108,20 @@ namespace Master.Components
                     }
                 }
 
-                if (i < packets1.Count)
+                if (i < packets2.Count)
                 {
                     switch (featureIndex)
                     {
                         case 0:
                             break;
                         case 1:
-                            y1 = packets2[i].emotionIntensity;
+                            y2 = packets2[i].emotionIntensity;
                             break;
                         case 2:
+                            y2 = ComputeValenceIntensity(packets2[i]);
                             break;
                         case 3:
-                            y1 = packets2[i].valenceIntensity;
+                            y2 = packets2[i].valenceIntensity;
                             break;
                     }
                 }
@@ -188,6 +190,17 @@ namespace Master.Components
             graphControl.RestoreScale(graphPane);
         }
 
+        public double ComputeValenceIntensity(VideoFrame frame)
+        {
+            int weight = 0;
+            if (frame.valence == "NEGATIVE")
+                weight = -1;
+            else if (frame.valence == "POSITIVE")
+                weight = 1;
+            else if (frame.valence == "NEUTRAL")
+                weight = 0;
+            return frame.valenceIntensity * (double)weight;
+        }
 
     }
 }
