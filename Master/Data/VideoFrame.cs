@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Master.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -9,19 +10,20 @@ namespace Master
 {
     [Serializable()]
     public class VideoFrame : ISerializable
-    {
+    {        
         public long time;
-        public string emotion;
+        public Emotion emotion;
         public float emotionIntensity;
-        public string valence;
+        public Valence valence;
+
         public float valenceIntensity;
 
         public VideoFrame(long time, string emotion, float emotionIntensity, string valence, float valenceIntensity)
         {
             this.time = time;
-            this.emotion = emotion;
+            this.emotion = Constants.ParseEmotion(emotion);
             this.emotionIntensity = emotionIntensity;
-            this.valence = valence;
+            this.valence = Constants.ParseValence(valence);
             this.valenceIntensity = valenceIntensity;
         }
 
@@ -30,9 +32,9 @@ namespace Master
         {
             //Get the values from info and assign them to the appropriate properties
             time = (long)info.GetValue("time", typeof(long));
-            emotion = (string)info.GetValue("emotion", typeof(string));
+            emotion = (Emotion)info.GetValue("emotion", typeof(Emotion));
             emotionIntensity = (float)info.GetValue("emotionIntensity", typeof(float));
-            valence = (string)info.GetValue("valence", typeof(string));
+            valence = (Valence)info.GetValue("valence", typeof(Valence));
             valenceIntensity = (float)info.GetValue("valenceIntensity", typeof(float));
 
         }

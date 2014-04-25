@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Master.Data;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -194,11 +195,11 @@ namespace Master.Components
         public double ComputeValenceIntensity(VideoFrame frame)
         {
             int weight = 0;
-            if (frame.valence == "NEGATIVE")
+            if (frame.valence == Valence.NEGATIVE)
                 weight = -1;
-            else if (frame.valence == "POSITIVE")
+            else if (frame.valence == Valence.POSITIVE)
                 weight = 1;
-            else if (frame.valence == "NEUTRAL")
+            else if (frame.valence == Valence.NEUTRAL)
                 weight = 0;
             return frame.valenceIntensity * (double)weight;
         }
