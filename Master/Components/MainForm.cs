@@ -20,6 +20,9 @@ namespace Master
         GraphController graphController;
         delegate void SetTextCallback(string text);
         private Thread thread;
+        private int selectedPacketIndex = -1;
+        private int selectedFeatureIndex = -1;
+        private Boolean updateGraphAxisNow = false;
 
         public MainForm(Model model)
         {
@@ -27,6 +30,46 @@ namespace Master
 
             this.model = model;
             this.graphController = new GraphController(graphControl);
+        }
+
+        public Boolean isLiveGraph()
+        {
+            return liveCheckBox.Checked;
+        }
+
+        public void CreateGraph()
+        {
+            if (selectedPacketIndex == 0)
+            {
+                List<AudioPacket> packets1 = model.getPersonA().audioPackets;
+                List<AudioPacket> packets2 = model.getPersonB().audioPackets;
+                graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
+            }
+            else if (selectedPacketIndex == 1)
+            {
+                List<VideoFrame> packets1 = new List<VideoFrame>();
+                foreach (VideoPacket packet in model.getPersonA().videoPackets)
+                {
+                    foreach (VideoFrame frame in packet.videoFrames)
+                        packets1.Add(frame);
+                }
+
+                List<VideoFrame> packets2 = new List<VideoFrame>();
+                foreach (VideoPacket packet in model.getPersonB().videoPackets)
+                {
+                    foreach (VideoFrame frame in packet.videoFrames)
+                        packets2.Add(frame);
+                }
+                graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
+            }
+        }
+
+        public void UpdateGraphAxis(Boolean boolean)
+        {
+            if (boolean)
+                updateGraphAxisNow = true;
+            else
+                graphControl.RestoreScale(graphControl.GraphPane);
         }
 
         public void updateDataOutput()
@@ -49,7 +92,7 @@ namespace Master
             }
             else if (showNothingRadioButton.Checked)
             {
-                text = text;
+                text = "";
             }
 
             this.thread = new Thread(new ThreadStart(this.ThreadProcSafe));
@@ -111,29 +154,7 @@ namespace Master
 
         private void drawButton_Click(object sender, EventArgs e)
         {
-            if (PacketListBox.SelectedIndex == 0)
-            {
-                List<AudioPacket> packets1 = model.getPersonA().audioPackets;
-                List<AudioPacket> packets2 = model.getPersonB().audioPackets;
-                graphController.CreateGraph(packets1, packets2, featureListBox.SelectedIndex);
-            }
-            else if (PacketListBox.SelectedIndex == 1)
-            {
-                List<VideoFrame> packets1 = new List<VideoFrame>();
-                foreach (VideoPacket packet in model.getPersonA().videoPackets)
-                {
-                    foreach (VideoFrame frame in packet.videoFrames)
-                        packets1.Add(frame);
-                }
-
-                List<VideoFrame> packets2 = new List<VideoFrame>();
-                foreach (VideoPacket packet in model.getPersonB().videoPackets)
-                {
-                    foreach (VideoFrame frame in packet.videoFrames)
-                        packets2.Add(frame);
-                }
-                graphController.CreateGraph(packets1, packets2, featureListBox.SelectedIndex);
-            }
+            CreateGraph();
         }
 
         private void PacketListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,11 +173,42 @@ namespace Master
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
             }
+
+            selectedPacketIndex = PacketListBox.SelectedIndex;
+            selectedFeatureIndex = -1;
         }
 
         private void showNothingRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            outputTextbox.Clear();
+            if (showNothingRadioButton.Checked)
+            {
+                outputTextbox.Clear();
+            }
+        }
+
+        private void liveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (liveCheckBox.Checked)
+            {
+                updateGraphTimer.Start();
+            }
+            else
+            {
+                updateGraphTimer.Stop();
+            }
+        }
+
+        private void featureListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedFeatureIndex = featureListBox.SelectedIndex;
+        }
+
+        private void updateGraphTimer_Tick(object sender, EventArgs e)
+        {
+            if (isLiveGraph())
+            {
+                CreateGraph();
+            }
         }
     }
 }

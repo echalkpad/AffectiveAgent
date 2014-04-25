@@ -43,6 +43,8 @@
             this.featureListBox = new System.Windows.Forms.ListBox();
             this.showNothingRadioButton = new System.Windows.Forms.RadioButton();
             this.displayGraphLabel = new System.Windows.Forms.Label();
+            this.liveCheckBox = new System.Windows.Forms.CheckBox();
+            this.updateGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -107,12 +109,10 @@
             // showConsoleRadioButton
             // 
             this.showConsoleRadioButton.AutoSize = true;
-            this.showConsoleRadioButton.Checked = true;
             this.showConsoleRadioButton.Location = new System.Drawing.Point(113, 9);
             this.showConsoleRadioButton.Name = "showConsoleRadioButton";
             this.showConsoleRadioButton.Size = new System.Drawing.Size(63, 17);
             this.showConsoleRadioButton.TabIndex = 5;
-            this.showConsoleRadioButton.TabStop = true;
             this.showConsoleRadioButton.Text = "Console";
             this.showConsoleRadioButton.UseVisualStyleBackColor = true;
             this.showConsoleRadioButton.CheckedChanged += new System.EventHandler(this.showConsoleRadioButton_CheckedChanged);
@@ -133,7 +133,7 @@
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(775, 143);
+            this.drawButton.Location = new System.Drawing.Point(775, 167);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
@@ -160,10 +160,12 @@
             this.featureListBox.Name = "featureListBox";
             this.featureListBox.Size = new System.Drawing.Size(95, 56);
             this.featureListBox.TabIndex = 9;
+            this.featureListBox.SelectedIndexChanged += new System.EventHandler(this.featureListBox_SelectedIndexChanged);
             // 
             // showNothingRadioButton
             // 
             this.showNothingRadioButton.AutoSize = true;
+            this.showNothingRadioButton.Checked = true;
             this.showNothingRadioButton.Location = new System.Drawing.Point(236, 9);
             this.showNothingRadioButton.Name = "showNothingRadioButton";
             this.showNothingRadioButton.Size = new System.Drawing.Size(62, 17);
@@ -182,11 +184,29 @@
             this.displayGraphLabel.TabIndex = 11;
             this.displayGraphLabel.Text = "Display:";
             // 
+            // liveCheckBox
+            // 
+            this.liveCheckBox.AutoSize = true;
+            this.liveCheckBox.Location = new System.Drawing.Point(776, 144);
+            this.liveCheckBox.Name = "liveCheckBox";
+            this.liveCheckBox.Size = new System.Drawing.Size(46, 17);
+            this.liveCheckBox.TabIndex = 12;
+            this.liveCheckBox.Text = "Live";
+            this.liveCheckBox.UseVisualStyleBackColor = true;
+            this.liveCheckBox.CheckedChanged += new System.EventHandler(this.liveCheckBox_CheckedChanged);
+            // 
+            // updateGraphTimer
+            // 
+            this.updateGraphTimer.Enabled = true;
+            this.updateGraphTimer.Interval = 1000;
+            this.updateGraphTimer.Tick += new System.EventHandler(this.updateGraphTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 458);
+            this.Controls.Add(this.liveCheckBox);
             this.Controls.Add(this.displayGraphLabel);
             this.Controls.Add(this.showNothingRadioButton);
             this.Controls.Add(this.featureListBox);
@@ -222,6 +242,8 @@
         private System.Windows.Forms.ListBox featureListBox;
         private System.Windows.Forms.RadioButton showNothingRadioButton;
         private System.Windows.Forms.Label displayGraphLabel;
+        private System.Windows.Forms.CheckBox liveCheckBox;
+        private System.Windows.Forms.Timer updateGraphTimer;
 
     }
 }

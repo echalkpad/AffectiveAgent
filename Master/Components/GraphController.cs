@@ -69,7 +69,7 @@ namespace Master.Components
 
             // Tell ZedGraph to refigure the axes since the data have changed
             graphControl.AxisChange();
-            graphControl.RestoreScale(graphPane);
+            graphControl.RestoreScale(graphControl.GraphPane);
         }
 
         public void CreateGraph(List<VideoFrame> packets1, List<VideoFrame> packets2, int featureIndex)
@@ -141,7 +141,7 @@ namespace Master.Components
             // Tell ZedGraph to refigure the
             // axes since the data have changed
             graphControl.AxisChange();
-            graphControl.RestoreScale(graphPane);
+            graphControl.RestoreScale(graphControl.GraphPane);
         }
 
         public void test(List<AudioPacket> packets1, List<AudioPacket> packets2)
@@ -188,6 +188,7 @@ namespace Master.Components
             // axes since the data have changed
             graphControl.AxisChange();
             graphControl.RestoreScale(graphPane);
+            graphControl.Refresh();
         }
 
         public double ComputeValenceIntensity(VideoFrame frame)
