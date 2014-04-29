@@ -52,10 +52,6 @@ namespace Master
                 List<VideoFrame> packets2 = model.getPersonB().getVideoFrames();
                 graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
             }
-            else if (selectedPacketIndex == 2)
-            {
-                graphController.CreateGraph(model.getInterpreter());
-            }
         }
 
         public void UpdateGraphAxis(Boolean boolean)
@@ -170,12 +166,6 @@ namespace Master
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
             }
-            else if (PacketListBox.SelectedIndex == 2)
-            {
-                featureListBox.Items.Add("Feelings");
-                //featureListBox.Items.Add("Valence");
-                //featureListBox.Items.Add("Valence intensity");
-            }
 
             selectedPacketIndex = PacketListBox.SelectedIndex;
             selectedFeatureIndex = -1;
@@ -217,6 +207,22 @@ namespace Master
         private void AutoResizeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             graphController.autoScale = AutoResizeCheckBox.Checked;
+        }
+
+        private void newDataButton_Click(object sender, EventArgs e)
+        {
+            foreach (Person p in model.getPersons())
+            {
+                p.Clear();
+            }
+            print("");
+            graphController.Clear();
+        }
+
+        private void clearGraphButton_Click(object sender, EventArgs e)
+        {
+            PacketListBox.ClearSelected();
+            graphController.Clear();
         }
     }
 }

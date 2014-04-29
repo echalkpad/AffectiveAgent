@@ -12,50 +12,58 @@ namespace Master.Components
     public class GraphController
     {
         public Model model;
+        public Interpreter interPreter;
         public ZedGraphControl graphControl;
         public GraphPane graphPane;
-        public LineItem lineItem1, lineItem2;
+        public LineItem lineItemA, lineItemB, lineItemAgent;
         public Boolean autoScale = true;
-        public List<LineObj> threshHoldLines = new List<LineObj>();
 
         public GraphController(Model model, ZedGraphControl graphControl)
         {
             this.model = model;
+            this.interPreter = model.getInterpreter();
             this.graphControl = graphControl;
             this.graphPane = graphControl.GraphPane;
-            this.lineItem1 = this.graphPane.AddCurve("Person A", new PointPairList(), Color.Red, SymbolType.Diamond);
-            this.lineItem2 = this.graphPane.AddCurve("Person B", new PointPairList(), Color.Blue, SymbolType.Circle);
+
+            // Initialize lines
+            this.lineItemA = this.graphPane.AddCurve("Person A", new PointPairList(), Color.Red, SymbolType.Diamond);
+            this.lineItemB = this.graphPane.AddCurve("Person B", new PointPairList(), Color.Blue, SymbolType.Circle);
+            this.lineItemAgent = this.graphPane.AddCurve("Agent", new PointPairList(), Color.Green, SymbolType.Star);
+            this.lineItemAgent.IsY2Axis = true;
 
             // Set the Titles
+            this.graphPane.Title.Text = "Graph of persons' data and the agent's state";
             this.graphPane.XAxis.Title.Text = "Time";
             this.graphPane.XAxis.Type = AxisType.Date;
+            this.graphPane.Y2Axis.Title.Text = "Agent's state";
+            this.graphPane.Y2Axis.Scale.Min = -4;
+            this.graphPane.Y2Axis.Scale.Max = 4;
+            this.graphPane.Y2Axis.IsVisible = true;
 
-            // Initialize threshold lines
-            for (int i = -3; i <= 3; i++)
-            {
-                LineObj threshHoldLine = new LineObj(Color.FromArgb(255, 175 - (Math.Abs(i) * 25), 175 - (Math.Abs(i) * 25)), graphPane.XAxis.Scale.Min, i, graphPane.XAxis.Scale.Max, i);
-                threshHoldLine.Location.CoordinateFrame = CoordType.AxisXYScale;
-                threshHoldLine.ZOrder = ZOrder.D_BehindAxis;
-                threshHoldLine.IsVisible = false;
-                graphPane.GraphObjList.Add(threshHoldLine);
-                threshHoldLines.Add(threshHoldLine);
-            }
+            // Update threshold lines
+            UpdateThresholdLines();
         }
 
         public void Clear()
         {
-            lineItem1.Clear();
-            lineItem2.Clear();
+            // Clear data
+            lineItemA.Clear();
+            lineItemB.Clear();
+            lineItemAgent.Clear();
+
+            // Refresh threshold lines
+            UpdateThresholdLines();
+
+            // Update titles
+            graphPane.YAxis.Title.Text = "";
         }
 
         public void CreateGraph(List<AudioPacket> packets1, List<AudioPacket> packets2, int featureIndex)
         {
             // Clear the graph
             Clear();
-            EnableThresholdLines(false);
 
             // Set the titles
-            graphPane.Title.Text = "Audio packets";
             graphPane.YAxis.Title.Text = "";
 
             // Make up some data arrays based on video features
@@ -112,8 +120,11 @@ namespace Master.Components
             }
 
             // Add points
-            lineItem1.Points = list1;
-            lineItem2.Points = list2;
+            lineItemA.Points = list1;
+            lineItemB.Points = list2;
+
+            // Add agent's graph
+            CreateAgentGraph();
 
             // Tell ZedGraph to refigure the axis since the data have changed
             graphControl.AxisChange();
@@ -125,7 +136,6 @@ namespace Master.Components
         {
             // Clear the graph
             Clear();
-            EnableThresholdLines(false);
 
             // Set the titles
             graphPane.Title.Text = "Video packets";
@@ -241,8 +251,11 @@ namespace Master.Components
             }
 
             // Add points
-            lineItem1.Points = list1;
-            lineItem2.Points = list2;
+            lineItemA.Points = list1;
+            lineItemB.Points = list2;
+
+            // Add agent's graph
+            CreateAgentGraph();
 
             // Tell ZedGraph to refigure the axis since the data have changed
             graphControl.AxisChange();
@@ -250,148 +263,33 @@ namespace Master.Components
                 graphControl.RestoreScale(graphControl.GraphPane);
         }
 
-        public void CreateGraph(Interpreter interPreter)
+        public void CreateAgentGraph()
         {
-            // Clear the graph
-            Clear();
+            // Update threshold lines
+            UpdateThresholdLines();
 
-            // Set the titles
-            graphPane.Title.Text = "Video packets";
-            graphPane.YAxis.Title.Text = "Agent's state";
-            graphPane.YAxis.Scale.Min = -4;
-            graphPane.YAxis.Scale.Max = 4;
-
-            // Enable threshold lines
-            EnableThresholdLines(true);
-
-            // Make up some data arrays based on video features
-            PointPairList list1 = new PointPairList();
-            PointPairList list2 = new PointPairList();
-
-
-            
-            
-            /*DateTime minTime = MinTime(packets1, packets2);
-            for (int i = 0; i < Math.Max(packets1.Count, packets2.Count); i++)
+            // Some test points
+            PointPairList list = new PointPairList();
+            for (int i = 0; i < 28; i++)
             {
-                // Packets of person A
-                if (i < packets1.Count)
-                {
-                    double x1 = ComputeX(minTime, packets1[i].time);
-                    double y1 = 0;
-                    switch (featureIndex)
-                    {
-                        case 0:
-                            graphPane.YAxis.Title.Text = "Anger";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.ANGER);
-                            break;
-                        case 1:
-                            graphPane.YAxis.Title.Text = "Contempt";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.CONTEMPT);
-                            break;
-                        case 2:
-                            graphPane.YAxis.Title.Text = "Disgust";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.DISGUST);
-                            break;
-                        case 3:
-                            graphPane.YAxis.Title.Text = "Fear";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.FEAR);
-                            break;
-                        case 4:
-                            graphPane.YAxis.Title.Text = "Joy";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.JOY);
-                            break;
-                        case 5:
-                            graphPane.YAxis.Title.Text = "Sadness";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.SADNESS);
-                            break;
-                        case 6:
-                            graphPane.YAxis.Title.Text = "Surprise";
-                            y1 = ComputeEmotionIntensity(packets1[i], Emotion.SURPRISE);
-                            break;
-                        case 7:
-                            graphPane.YAxis.Title.Text = "Emotion intensity";
-                            y1 = packets1[i].emotionIntensity;
-                            break;
-                        case 8:
-                            graphPane.YAxis.Title.Text = "Valence";
-                            y1 = ComputeValenceIntensity(packets1[i]);
-                            break;
-                        case 9:
-                            graphPane.YAxis.Title.Text = "Valence intensity";
-                            y1 = packets1[i].valenceIntensity;
-                            break;
-                    }
-                    list1.Add(x1, y1);
-                }
+                double x = ((double) i) / (60.0 * 24.0 * 60);
+                double y = (i % 7) - 3;
+                list.Add(new PointPair(x, y));
+            }
+            lineItemAgent.Points = list;
 
-                // Packets of person B
-                if (i < packets2.Count)
-                {
-                    double x2 = ComputeX(minTime, packets2[i].time);
-                    double y2 = 0;
-                    switch (featureIndex)
-                    {
-                        case 0:
-                            graphPane.YAxis.Title.Text = "Anger";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.ANGER);
-                            break;
-                        case 1:
-                            graphPane.YAxis.Title.Text = "Contempt";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.CONTEMPT);
-                            break;
-                        case 2:
-                            graphPane.YAxis.Title.Text = "Disgust";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.DISGUST);
-                            break;
-                        case 3:
-                            graphPane.YAxis.Title.Text = "Fear";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.FEAR);
-                            break;
-                        case 4:
-                            graphPane.YAxis.Title.Text = "Joy";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.JOY);
-                            break;
-                        case 5:
-                            graphPane.YAxis.Title.Text = "Sadness";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.SADNESS);
-                            break;
-                        case 6:
-                            graphPane.YAxis.Title.Text = "Surprise";
-                            y2 = ComputeEmotionIntensity(packets2[i], Emotion.SURPRISE);
-                            break;
-                        case 7:
-                            graphPane.YAxis.Title.Text = "Emotion intensity";
-                            y2 = packets2[i].emotionIntensity;
-                            break;
-                        case 8:
-                            graphPane.YAxis.Title.Text = "Valence";
-                            y2 = ComputeValenceIntensity(packets2[i]);
-                            break;
-                        case 9:
-                            graphPane.YAxis.Title.Text = "Valence intensity";
-                            y2 = packets2[i].valenceIntensity;
-                            break;
-                    }
-                    list2.Add(x2, y2);
-                }
-            }*/
-
-            // Add points
-            lineItem1.Points = list1;
-            lineItem2.Points = list2;
-
-            // Tell ZedGraph to refigure the axis since the data have changed
+            // Refresh graph
             graphControl.Refresh();
-            //if (autoScale)
-            //    graphControl.RestoreScale(graphControl.GraphPane);
         }
 
-        public void EnableThresholdLines(Boolean enable)
+        public void UpdateThresholdLines()
         {
-            for (int i = 0; i < threshHoldLines.Count; i++)
+            for (int i = -3; i <= 3; i++)
             {
-                threshHoldLines[i].IsVisible = enable;
+                LineObj threshHoldLine = new LineObj(Color.FromArgb(255, 175 - (Math.Abs(i) * 25), 175 - (Math.Abs(i) * 25)), graphPane.XAxis.Scale.Min, i, graphPane.XAxis.Scale.Max, i);
+                threshHoldLine.ZOrder = ZOrder.D_BehindAxis;
+                threshHoldLine.Location.CoordinateFrame = CoordType.AxisXY2Scale;
+                graphPane.GraphObjList.Add(threshHoldLine);
             }
         }
 

@@ -46,6 +46,8 @@
             this.liveCheckBox = new System.Windows.Forms.CheckBox();
             this.updateGraphTimer = new System.Windows.Forms.Timer(this.components);
             this.AutoResizeCheckBox = new System.Windows.Forms.CheckBox();
+            this.newDataButton = new System.Windows.Forms.Button();
+            this.clearGraphButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -59,7 +61,7 @@
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(12, 406);
+            this.openButton.Location = new System.Drawing.Point(93, 406);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(75, 23);
             this.openButton.TabIndex = 0;
@@ -69,7 +71,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(93, 406);
+            this.saveButton.Location = new System.Drawing.Point(174, 406);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 1;
@@ -142,7 +144,7 @@
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(775, 280);
+            this.drawButton.Location = new System.Drawing.Point(775, 267);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
@@ -155,18 +157,17 @@
             this.PacketListBox.FormattingEnabled = true;
             this.PacketListBox.Items.AddRange(new object[] {
             "Audio packets",
-            "Video packets",
-            "Agent\'s state"});
+            "Video packets"});
             this.PacketListBox.Location = new System.Drawing.Point(775, 45);
             this.PacketListBox.Name = "PacketListBox";
-            this.PacketListBox.Size = new System.Drawing.Size(95, 43);
+            this.PacketListBox.Size = new System.Drawing.Size(95, 30);
             this.PacketListBox.TabIndex = 8;
             this.PacketListBox.SelectedIndexChanged += new System.EventHandler(this.PacketListBox_SelectedIndexChanged);
             // 
             // featureListBox
             // 
             this.featureListBox.FormattingEnabled = true;
-            this.featureListBox.Location = new System.Drawing.Point(775, 94);
+            this.featureListBox.Location = new System.Drawing.Point(775, 81);
             this.featureListBox.Name = "featureListBox";
             this.featureListBox.Size = new System.Drawing.Size(95, 134);
             this.featureListBox.TabIndex = 9;
@@ -199,7 +200,7 @@
             this.liveCheckBox.AutoSize = true;
             this.liveCheckBox.Checked = true;
             this.liveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.liveCheckBox.Location = new System.Drawing.Point(775, 257);
+            this.liveCheckBox.Location = new System.Drawing.Point(775, 244);
             this.liveCheckBox.Name = "liveCheckBox";
             this.liveCheckBox.Size = new System.Drawing.Size(46, 17);
             this.liveCheckBox.TabIndex = 12;
@@ -218,7 +219,7 @@
             this.AutoResizeCheckBox.AutoSize = true;
             this.AutoResizeCheckBox.Checked = true;
             this.AutoResizeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 234);
+            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 221);
             this.AutoResizeCheckBox.Name = "AutoResizeCheckBox";
             this.AutoResizeCheckBox.Size = new System.Drawing.Size(78, 17);
             this.AutoResizeCheckBox.TabIndex = 13;
@@ -226,11 +227,33 @@
             this.AutoResizeCheckBox.UseVisualStyleBackColor = true;
             this.AutoResizeCheckBox.CheckedChanged += new System.EventHandler(this.AutoResizeCheckBox_CheckedChanged);
             // 
+            // newDataButton
+            // 
+            this.newDataButton.Location = new System.Drawing.Point(12, 406);
+            this.newDataButton.Name = "newDataButton";
+            this.newDataButton.Size = new System.Drawing.Size(75, 23);
+            this.newDataButton.TabIndex = 14;
+            this.newDataButton.Text = "New";
+            this.newDataButton.UseVisualStyleBackColor = true;
+            this.newDataButton.Click += new System.EventHandler(this.newDataButton_Click);
+            // 
+            // clearGraphButton
+            // 
+            this.clearGraphButton.Location = new System.Drawing.Point(775, 297);
+            this.clearGraphButton.Name = "clearGraphButton";
+            this.clearGraphButton.Size = new System.Drawing.Size(95, 23);
+            this.clearGraphButton.TabIndex = 15;
+            this.clearGraphButton.Text = "Clear";
+            this.clearGraphButton.UseVisualStyleBackColor = true;
+            this.clearGraphButton.Click += new System.EventHandler(this.clearGraphButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 458);
+            this.Controls.Add(this.clearGraphButton);
+            this.Controls.Add(this.newDataButton);
             this.Controls.Add(this.AutoResizeCheckBox);
             this.Controls.Add(this.liveCheckBox);
             this.Controls.Add(this.displayGraphLabel);
@@ -271,6 +294,8 @@
         private System.Windows.Forms.CheckBox liveCheckBox;
         private System.Windows.Forms.Timer updateGraphTimer;
         private System.Windows.Forms.CheckBox AutoResizeCheckBox;
+        private System.Windows.Forms.Button newDataButton;
+        private System.Windows.Forms.Button clearGraphButton;
 
     }
 }

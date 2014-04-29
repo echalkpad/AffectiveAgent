@@ -42,6 +42,13 @@ namespace Master
             return frames;
         }
 
+        // Clear data
+        public void Clear()
+        {
+            videoPackets = new List<VideoPacket>();
+            audioPackets = new List<AudioPacket>();
+        }
+
         //Deserialization constructor.
         public Person(SerializationInfo info, StreamingContext ctxt)
         {

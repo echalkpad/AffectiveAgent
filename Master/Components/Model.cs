@@ -124,13 +124,13 @@ namespace Master
             DateTime video, audio;
             DateTime video1 = getMinTime(getPersonA().getVideoFrames());
             DateTime video2 = getMinTime(getPersonB().getVideoFrames());
-            video = video1.CompareTo(video2) > 0 ? video1 : video2;
+            video = video1 < video2 ? video1 : video2;
 
             DateTime audio1 = getMinTime(getPersonA().audioPackets);
             DateTime audio2 = getMinTime(getPersonB().audioPackets);
-            audio = audio1.CompareTo(audio2) > 0 ? audio1 : audio2;
+            audio = audio1 < audio2 ? audio1 : audio2;
 
-            return video.CompareTo(audio) > 0 ? video : audio;
+            return video < audio ? video : audio;
         }
 
         public DateTime getMaxTime()
@@ -138,13 +138,13 @@ namespace Master
             DateTime video, audio;
             DateTime video1 = getMaxTime(getPersonA().getVideoFrames());
             DateTime video2 = getMaxTime(getPersonB().getVideoFrames());
-            video = video1.CompareTo(video2) < 0 ? video1 : video2;
+            video = video1 > video2 ? video1 : video2;
 
             DateTime audio1 = getMaxTime(getPersonA().audioPackets);
             DateTime audio2 = getMaxTime(getPersonB().audioPackets);
-            audio = audio1.CompareTo(audio2) < 0 ? audio1 : audio2;
+            audio = audio1 > audio2 ? audio1 : audio2;
 
-            return video.CompareTo(audio) < 0 ? video : audio;
+            return video > audio ? video : audio;
         }
 
         #endregion
