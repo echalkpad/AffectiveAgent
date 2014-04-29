@@ -40,9 +40,13 @@ namespace Master
             DateTime minTime = model.getMinTime();
         }
 
-        public void Update()
+        public int Update()
         {
             Interpret(DateTime.Now);
+            if (values.Count == 0)
+                return -100;
+            else
+                return (int) Math.Round(values[values.Count - 1].value);
         }
 
         public void Interpret(DateTime dateTime)

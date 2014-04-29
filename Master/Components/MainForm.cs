@@ -260,7 +260,8 @@ namespace Master
 
         private void updateCOMTimer_Tick(object sender, EventArgs e)
         {
-            model.getInterpreter().Update();
+            int state = model.getInterpreter().Update();
+            model.getCOM().switchState(state);
         }
     }
 }

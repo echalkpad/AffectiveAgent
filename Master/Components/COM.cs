@@ -21,6 +21,14 @@ namespace Master
         public COM(Model model)
         {
             this.model = model;
+            serialPort1.PortName = "COM6";
+            serialPort1.BaudRate = 9600;
+            serialPort1.Open();
+        }
+
+        public void switchState(int state)
+        {
+            serialPort1.Write(state.ToString());
         }
 
         public void switchLightOn()

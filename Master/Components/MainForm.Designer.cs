@@ -312,7 +312,7 @@
             // updateCOMTimer
             // 
             this.updateCOMTimer.Enabled = true;
-            this.updateCOMTimer.Interval = 1000;
+            this.updateCOMTimer.Interval = 5000;
             this.updateCOMTimer.Tick += new System.EventHandler(this.updateCOMTimer_Tick);
             // 
             // MainForm
