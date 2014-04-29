@@ -31,6 +31,17 @@ namespace Master
             audioPackets.Add(packet);
         }
 
+        public List<VideoFrame> getVideoFrames()
+        {
+            List<VideoFrame> frames = new List<VideoFrame>();
+            foreach (VideoPacket packet in videoPackets)
+            {
+                foreach (VideoFrame frame in packet.videoFrames)
+                    frames.Add(frame);
+            }
+            return frames;
+        }
+
         //Deserialization constructor.
         public Person(SerializationInfo info, StreamingContext ctxt)
         {

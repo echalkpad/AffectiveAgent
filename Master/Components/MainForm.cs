@@ -30,7 +30,7 @@ namespace Master
             InitializeComponent();
 
             this.model = model;
-            this.graphController = new GraphController(graphControl);
+            this.graphController = new GraphController(model, graphControl);
         }
 
         public Boolean isLiveGraph()
@@ -48,20 +48,13 @@ namespace Master
             }
             else if (selectedPacketIndex == 1)
             {
-                List<VideoFrame> packets1 = new List<VideoFrame>();
-                foreach (VideoPacket packet in model.getPersonA().videoPackets)
-                {
-                    foreach (VideoFrame frame in packet.videoFrames)
-                        packets1.Add(frame);
-                }
-
-                List<VideoFrame> packets2 = new List<VideoFrame>();
-                foreach (VideoPacket packet in model.getPersonB().videoPackets)
-                {
-                    foreach (VideoFrame frame in packet.videoFrames)
-                        packets2.Add(frame);
-                }
+                List<VideoFrame> packets1 = model.getPersonA().getVideoFrames();
+                List<VideoFrame> packets2 = model.getPersonB().getVideoFrames();
                 graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
+            }
+            else if (selectedPacketIndex == 2)
+            {
+                graphController.CreateGraph(model.getInterpreter());
             }
         }
 
@@ -176,6 +169,12 @@ namespace Master
                 featureListBox.Items.Add("Emotion intensity");
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
+            }
+            else if (PacketListBox.SelectedIndex == 2)
+            {
+                featureListBox.Items.Add("Feelings");
+                //featureListBox.Items.Add("Valence");
+                //featureListBox.Items.Add("Valence intensity");
             }
 
             selectedPacketIndex = PacketListBox.SelectedIndex;

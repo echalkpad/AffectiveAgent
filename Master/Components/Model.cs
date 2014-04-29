@@ -29,7 +29,7 @@ namespace Master
             persons.Add(new Person("B"));
             receiver = new Receiver(this);
             receiver.start();
-            interpreter = new Interpreter(this);
+            interpreter = new Interpreter(this, getPersonA(), getPersonB());
             com = new COM(this);
 
             // Run main form
@@ -81,6 +81,73 @@ namespace Master
             return getPerson(videoPacket.person);
         }
 
+        #region Max and min time
+
+        public DateTime getMaxTime(List<VideoFrame> frames)
+        {
+            DateTime winner = DateTime.MinValue;
+            foreach (VideoFrame frame in frames)
+                if (frame.time > winner)
+                    winner = frame.time;
+            return winner;
+        }
+
+        public DateTime getMaxTime(List<AudioPacket> packets)
+        {
+            DateTime winner = DateTime.MinValue;
+            foreach (AudioPacket packet in packets)
+                if (packet.time > winner)
+                    winner = packet.time;
+            return winner;
+        }
+
+        public DateTime getMinTime(List<VideoFrame> frames)
+        {
+            DateTime winner = DateTime.MaxValue;
+            foreach (VideoFrame frame in frames)
+                if (frame.time < winner)
+                    winner = frame.time;
+            return winner;
+        }
+
+        public DateTime getMinTime(List<AudioPacket> packets)
+        {
+            DateTime winner = DateTime.MaxValue;
+            foreach (AudioPacket packet in packets)
+                if (packet.time < winner)
+                    winner = packet.time;
+            return winner;
+        }
+
+        public DateTime getMinTime()
+        {
+            DateTime video, audio;
+            DateTime video1 = getMinTime(getPersonA().getVideoFrames());
+            DateTime video2 = getMinTime(getPersonB().getVideoFrames());
+            video = video1.CompareTo(video2) > 0 ? video1 : video2;
+
+            DateTime audio1 = getMinTime(getPersonA().audioPackets);
+            DateTime audio2 = getMinTime(getPersonB().audioPackets);
+            audio = audio1.CompareTo(audio2) > 0 ? audio1 : audio2;
+
+            return video.CompareTo(audio) > 0 ? video : audio;
+        }
+
+        public DateTime getMaxTime()
+        {
+            DateTime video, audio;
+            DateTime video1 = getMaxTime(getPersonA().getVideoFrames());
+            DateTime video2 = getMaxTime(getPersonB().getVideoFrames());
+            video = video1.CompareTo(video2) < 0 ? video1 : video2;
+
+            DateTime audio1 = getMaxTime(getPersonA().audioPackets);
+            DateTime audio2 = getMaxTime(getPersonB().audioPackets);
+            audio = audio1.CompareTo(audio2) < 0 ? audio1 : audio2;
+
+            return video.CompareTo(audio) < 0 ? video : audio;
+        }
+
+        #endregion
 
         public void print(String text)
         {
