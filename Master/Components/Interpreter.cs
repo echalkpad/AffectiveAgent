@@ -11,14 +11,18 @@ namespace Master
         Model model;
         Person personA;
         Person personB;
-
-        List<TimeValuePair> values;
+        public List<TimeValuePair> values = new List<TimeValuePair>();
 
         public Interpreter(Model model, Person personA, Person personB)
         {
             this.model = model;
             this.personA = personA;
             this.personB = personB;
+        }
+
+        public void Clear()
+        {
+            values = new List<TimeValuePair>();
         }
 
         public Person getPersonA()
@@ -31,19 +35,42 @@ namespace Master
             return model.getPersonB();
         }
 
-        public void interpret()
+        public void Interpret()
         {
             DateTime minTime = model.getMinTime();
         }
 
-        public void interpret(DateTime dateTime)
+        public void Update()
         {
-            double value = (new Random().NextDouble() - 0.5) * 6.0;
-            values.Add(new TimeValuePair(dateTime, value));
+            Interpret(DateTime.Now);
+        }
+
+        public void Interpret(DateTime dateTime)
+        {
+            if (model.getAgentBehaviour() == Model.AgentBehaviour.ON)
+            {
+                values.Add(new TimeValuePair(dateTime, 0.0));
+            }
+            else if (model.getAgentBehaviour() == Model.AgentBehaviour.RANDOM)
+            {
+                double value = (new Random().NextDouble() - 0.5) * 6.0;
+                values.Add(new TimeValuePair(dateTime, value));
+            }   
+        }
+
+        public DateTime minTime()
+        {
+            DateTime winner = DateTime.MaxValue;
+            foreach (TimeValuePair value in values)
+            {
+                if (value.time < winner)
+                    winner = value.time;
+            }
+            return winner;
         }
     }
 
-    class TimeValuePair
+    public class TimeValuePair
     {
         public DateTime time;
         public double value;

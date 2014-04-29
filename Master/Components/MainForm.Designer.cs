@@ -48,6 +48,13 @@
             this.AutoResizeCheckBox = new System.Windows.Forms.CheckBox();
             this.newDataButton = new System.Windows.Forms.Button();
             this.clearGraphButton = new System.Windows.Forms.Button();
+            this.agentOffRadioButton = new System.Windows.Forms.RadioButton();
+            this.agentRandomRadioButton = new System.Windows.Forms.RadioButton();
+            this.agentOnRadioButton = new System.Windows.Forms.RadioButton();
+            this.AgentStateLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.updateCOMTimer = new System.Windows.Forms.Timer(this.components);
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // openFileDialog
@@ -61,7 +68,7 @@
             // 
             // openButton
             // 
-            this.openButton.Location = new System.Drawing.Point(93, 406);
+            this.openButton.Location = new System.Drawing.Point(93, 427);
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(75, 23);
             this.openButton.TabIndex = 0;
@@ -71,7 +78,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(174, 406);
+            this.saveButton.Location = new System.Drawing.Point(174, 427);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 1;
@@ -81,7 +88,7 @@
             // 
             // outputTextbox
             // 
-            this.outputTextbox.Location = new System.Drawing.Point(13, 29);
+            this.outputTextbox.Location = new System.Drawing.Point(13, 12);
             this.outputTextbox.Multiline = true;
             this.outputTextbox.Name = "outputTextbox";
             this.outputTextbox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -91,7 +98,7 @@
             // outputLabel
             // 
             this.outputLabel.AutoSize = true;
-            this.outputLabel.Location = new System.Drawing.Point(12, 11);
+            this.outputLabel.Location = new System.Drawing.Point(12, 390);
             this.outputLabel.Name = "outputLabel";
             this.outputLabel.Size = new System.Drawing.Size(42, 13);
             this.outputLabel.TabIndex = 3;
@@ -100,7 +107,7 @@
             // showDataRadioButton
             // 
             this.showDataRadioButton.AutoSize = true;
-            this.showDataRadioButton.Location = new System.Drawing.Point(182, 9);
+            this.showDataRadioButton.Location = new System.Drawing.Point(129, 390);
             this.showDataRadioButton.Name = "showDataRadioButton";
             this.showDataRadioButton.Size = new System.Drawing.Size(48, 17);
             this.showDataRadioButton.TabIndex = 4;
@@ -112,7 +119,7 @@
             // showConsoleRadioButton
             // 
             this.showConsoleRadioButton.AutoSize = true;
-            this.showConsoleRadioButton.Location = new System.Drawing.Point(113, 9);
+            this.showConsoleRadioButton.Location = new System.Drawing.Point(60, 390);
             this.showConsoleRadioButton.Name = "showConsoleRadioButton";
             this.showConsoleRadioButton.Size = new System.Drawing.Size(63, 17);
             this.showConsoleRadioButton.TabIndex = 5;
@@ -130,7 +137,7 @@
             this.graphControl.IsPrintScaleAll = false;
             this.graphControl.IsShowHScrollBar = true;
             this.graphControl.IsShowVScrollBar = true;
-            this.graphControl.Location = new System.Drawing.Point(305, 29);
+            this.graphControl.Location = new System.Drawing.Point(305, 12);
             this.graphControl.Name = "graphControl";
             this.graphControl.ScrollGrace = 0D;
             this.graphControl.ScrollMaxX = 0D;
@@ -139,12 +146,12 @@
             this.graphControl.ScrollMinX = 0D;
             this.graphControl.ScrollMinY = 0D;
             this.graphControl.ScrollMinY2 = 0D;
-            this.graphControl.Size = new System.Drawing.Size(464, 371);
+            this.graphControl.Size = new System.Drawing.Size(464, 438);
             this.graphControl.TabIndex = 6;
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(775, 267);
+            this.drawButton.Location = new System.Drawing.Point(775, 247);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
@@ -158,7 +165,7 @@
             this.PacketListBox.Items.AddRange(new object[] {
             "Audio packets",
             "Video packets"});
-            this.PacketListBox.Location = new System.Drawing.Point(775, 45);
+            this.PacketListBox.Location = new System.Drawing.Point(775, 25);
             this.PacketListBox.Name = "PacketListBox";
             this.PacketListBox.Size = new System.Drawing.Size(95, 30);
             this.PacketListBox.TabIndex = 8;
@@ -167,7 +174,7 @@
             // featureListBox
             // 
             this.featureListBox.FormattingEnabled = true;
-            this.featureListBox.Location = new System.Drawing.Point(775, 81);
+            this.featureListBox.Location = new System.Drawing.Point(775, 61);
             this.featureListBox.Name = "featureListBox";
             this.featureListBox.Size = new System.Drawing.Size(95, 134);
             this.featureListBox.TabIndex = 9;
@@ -177,7 +184,7 @@
             // 
             this.showNothingRadioButton.AutoSize = true;
             this.showNothingRadioButton.Checked = true;
-            this.showNothingRadioButton.Location = new System.Drawing.Point(236, 9);
+            this.showNothingRadioButton.Location = new System.Drawing.Point(183, 390);
             this.showNothingRadioButton.Name = "showNothingRadioButton";
             this.showNothingRadioButton.Size = new System.Drawing.Size(62, 17);
             this.showNothingRadioButton.TabIndex = 10;
@@ -189,7 +196,7 @@
             // displayGraphLabel
             // 
             this.displayGraphLabel.AutoSize = true;
-            this.displayGraphLabel.Location = new System.Drawing.Point(775, 29);
+            this.displayGraphLabel.Location = new System.Drawing.Point(775, 9);
             this.displayGraphLabel.Name = "displayGraphLabel";
             this.displayGraphLabel.Size = new System.Drawing.Size(44, 13);
             this.displayGraphLabel.TabIndex = 11;
@@ -200,7 +207,7 @@
             this.liveCheckBox.AutoSize = true;
             this.liveCheckBox.Checked = true;
             this.liveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.liveCheckBox.Location = new System.Drawing.Point(775, 244);
+            this.liveCheckBox.Location = new System.Drawing.Point(775, 224);
             this.liveCheckBox.Name = "liveCheckBox";
             this.liveCheckBox.Size = new System.Drawing.Size(46, 17);
             this.liveCheckBox.TabIndex = 12;
@@ -219,7 +226,7 @@
             this.AutoResizeCheckBox.AutoSize = true;
             this.AutoResizeCheckBox.Checked = true;
             this.AutoResizeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 221);
+            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 201);
             this.AutoResizeCheckBox.Name = "AutoResizeCheckBox";
             this.AutoResizeCheckBox.Size = new System.Drawing.Size(78, 17);
             this.AutoResizeCheckBox.TabIndex = 13;
@@ -229,7 +236,7 @@
             // 
             // newDataButton
             // 
-            this.newDataButton.Location = new System.Drawing.Point(12, 406);
+            this.newDataButton.Location = new System.Drawing.Point(12, 427);
             this.newDataButton.Name = "newDataButton";
             this.newDataButton.Size = new System.Drawing.Size(75, 23);
             this.newDataButton.TabIndex = 14;
@@ -239,7 +246,7 @@
             // 
             // clearGraphButton
             // 
-            this.clearGraphButton.Location = new System.Drawing.Point(775, 297);
+            this.clearGraphButton.Location = new System.Drawing.Point(775, 277);
             this.clearGraphButton.Name = "clearGraphButton";
             this.clearGraphButton.Size = new System.Drawing.Size(95, 23);
             this.clearGraphButton.TabIndex = 15;
@@ -247,11 +254,73 @@
             this.clearGraphButton.UseVisualStyleBackColor = true;
             this.clearGraphButton.Click += new System.EventHandler(this.clearGraphButton_Click);
             // 
+            // agentOffRadioButton
+            // 
+            this.agentOffRadioButton.AutoSize = true;
+            this.agentOffRadioButton.Checked = true;
+            this.agentOffRadioButton.Location = new System.Drawing.Point(6, 20);
+            this.agentOffRadioButton.Name = "agentOffRadioButton";
+            this.agentOffRadioButton.Size = new System.Drawing.Size(39, 17);
+            this.agentOffRadioButton.TabIndex = 16;
+            this.agentOffRadioButton.TabStop = true;
+            this.agentOffRadioButton.Text = "Off";
+            this.agentOffRadioButton.UseVisualStyleBackColor = true;
+            this.agentOffRadioButton.CheckedChanged += new System.EventHandler(this.agentOffRadioButton_CheckedChanged);
+            // 
+            // agentRandomRadioButton
+            // 
+            this.agentRandomRadioButton.AutoSize = true;
+            this.agentRandomRadioButton.Location = new System.Drawing.Point(6, 43);
+            this.agentRandomRadioButton.Name = "agentRandomRadioButton";
+            this.agentRandomRadioButton.Size = new System.Drawing.Size(65, 17);
+            this.agentRandomRadioButton.TabIndex = 17;
+            this.agentRandomRadioButton.Text = "Random";
+            this.agentRandomRadioButton.UseVisualStyleBackColor = true;
+            this.agentRandomRadioButton.CheckedChanged += new System.EventHandler(this.agentRandomRadioButton_CheckedChanged);
+            // 
+            // agentOnRadioButton
+            // 
+            this.agentOnRadioButton.AutoSize = true;
+            this.agentOnRadioButton.Location = new System.Drawing.Point(6, 66);
+            this.agentOnRadioButton.Name = "agentOnRadioButton";
+            this.agentOnRadioButton.Size = new System.Drawing.Size(39, 17);
+            this.agentOnRadioButton.TabIndex = 18;
+            this.agentOnRadioButton.Text = "On";
+            this.agentOnRadioButton.UseVisualStyleBackColor = true;
+            this.agentOnRadioButton.CheckedChanged += new System.EventHandler(this.agentOnRadioButton_CheckedChanged);
+            // 
+            // AgentStateLabel
+            // 
+            this.AgentStateLabel.AutoSize = true;
+            this.AgentStateLabel.Location = new System.Drawing.Point(3, 4);
+            this.AgentStateLabel.Name = "AgentStateLabel";
+            this.AgentStateLabel.Size = new System.Drawing.Size(71, 13);
+            this.AgentStateLabel.TabIndex = 19;
+            this.AgentStateLabel.Text = "Agent\'s state:";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.AgentStateLabel);
+            this.panel1.Controls.Add(this.agentOffRadioButton);
+            this.panel1.Controls.Add(this.agentOnRadioButton);
+            this.panel1.Controls.Add(this.agentRandomRadioButton);
+            this.panel1.Location = new System.Drawing.Point(775, 361);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(95, 85);
+            this.panel1.TabIndex = 20;
+            // 
+            // updateCOMTimer
+            // 
+            this.updateCOMTimer.Enabled = true;
+            this.updateCOMTimer.Interval = 1000;
+            this.updateCOMTimer.Tick += new System.EventHandler(this.updateCOMTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(883, 458);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.clearGraphButton);
             this.Controls.Add(this.newDataButton);
             this.Controls.Add(this.AutoResizeCheckBox);
@@ -269,7 +338,9 @@
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.openButton);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Master";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +367,12 @@
         private System.Windows.Forms.CheckBox AutoResizeCheckBox;
         private System.Windows.Forms.Button newDataButton;
         private System.Windows.Forms.Button clearGraphButton;
+        private System.Windows.Forms.RadioButton agentOffRadioButton;
+        private System.Windows.Forms.RadioButton agentRandomRadioButton;
+        private System.Windows.Forms.RadioButton agentOnRadioButton;
+        private System.Windows.Forms.Label AgentStateLabel;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer updateCOMTimer;
 
     }
 }

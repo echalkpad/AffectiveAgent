@@ -31,6 +31,7 @@ namespace Master
 
             this.model = model;
             this.graphController = new GraphController(model, graphControl);
+            this.updateCOMTimer.Start();
         }
 
         public Boolean isLiveGraph()
@@ -68,6 +69,23 @@ namespace Master
             {
                 print("");
             }
+        }
+
+        public void UpdateAgentBehaviour()
+        {
+            if (agentOffRadioButton.Checked)
+            {
+                model.setAgentBehaviour(Model.AgentBehaviour.OFF);
+            }
+            else if (agentRandomRadioButton.Checked)
+            {
+                model.setAgentBehaviour(Model.AgentBehaviour.RANDOM);
+            }
+            else if (agentOnRadioButton.Checked)
+            {
+                model.setAgentBehaviour(Model.AgentBehaviour.ON);
+            }
+
         }
 
         public void print(String text)
@@ -223,6 +241,26 @@ namespace Master
         {
             PacketListBox.ClearSelected();
             graphController.Clear();
+        }
+
+        private void agentOffRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAgentBehaviour();
+        }
+
+        private void agentRandomRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAgentBehaviour();
+        }
+
+        private void agentOnRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateAgentBehaviour();
+        }
+
+        private void updateCOMTimer_Tick(object sender, EventArgs e)
+        {
+            model.getInterpreter().Update();
         }
     }
 }

@@ -12,16 +12,18 @@ namespace Master.Components
     public class GraphController
     {
         public Model model;
-        public Interpreter interPreter;
         public ZedGraphControl graphControl;
         public GraphPane graphPane;
         public LineItem lineItemA, lineItemB, lineItemAgent;
         public Boolean autoScale = true;
+        public Interpreter interpreter
+        {
+            get { return model.getInterpreter(); }
+        }
 
         public GraphController(Model model, ZedGraphControl graphControl)
         {
             this.model = model;
-            this.interPreter = model.getInterpreter();
             this.graphControl = graphControl;
             this.graphPane = graphControl.GraphPane;
 
@@ -36,6 +38,8 @@ namespace Master.Components
             this.graphPane.XAxis.Title.Text = "Time";
             this.graphPane.XAxis.Type = AxisType.Date;
             this.graphPane.Y2Axis.Title.Text = "Agent's state";
+            this.graphPane.YAxis.Scale.Min = -4;
+            this.graphPane.YAxis.Scale.Max = 4;
             this.graphPane.Y2Axis.Scale.Min = -4;
             this.graphPane.Y2Axis.Scale.Max = 4;
             this.graphPane.Y2Axis.IsVisible = true;
@@ -265,21 +269,20 @@ namespace Master.Components
 
         public void CreateAgentGraph()
         {
-            // Update threshold lines
-            UpdateThresholdLines();
-
             // Some test points
             PointPairList list = new PointPairList();
-            for (int i = 0; i < 28; i++)
+            DateTime minTime = interpreter.minTime();
+            foreach (TimeValuePair value in interpreter.values)
             {
-                double x = ((double) i) / (60.0 * 24.0 * 60);
-                double y = (i % 7) - 3;
+                double x = ComputeX(minTime, value.time);
+                double y = value.value;
                 list.Add(new PointPair(x, y));
             }
             lineItemAgent.Points = list;
 
             // Refresh graph
-            graphControl.Refresh();
+            UpdateThresholdLines();
+            graphControl.Refresh();            
         }
 
         public void UpdateThresholdLines()

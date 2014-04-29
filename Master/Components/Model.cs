@@ -9,13 +9,20 @@ using System.Windows.Forms;
 
 namespace Master
 {
+
     public class Model
     {
-        List<Person> persons = new List<Person>();
-        Receiver receiver;
-        Interpreter interpreter;
-        COM com;
-        MainForm mainForm;
+        public enum AgentBehaviour
+        {
+            ON, OFF, RANDOM
+        }
+
+        public List<Person> persons = new List<Person>();
+        public Receiver receiver;
+        public Interpreter interpreter;
+        public COM com;
+        public MainForm mainForm;
+        public AgentBehaviour agentBehaviour;
 
         public Model()
         {
@@ -31,6 +38,7 @@ namespace Master
             receiver.start();
             interpreter = new Interpreter(this, getPersonA(), getPersonB());
             com = new COM(this);
+            agentBehaviour = AgentBehaviour.OFF;
 
             // Run main form
             Application.Run(this.mainForm);
@@ -79,6 +87,16 @@ namespace Master
         public Person getPerson(VideoPacket videoPacket)
         {
             return getPerson(videoPacket.person);
+        }
+
+        public AgentBehaviour getAgentBehaviour()
+        {
+            return agentBehaviour;
+        }
+
+        public void setAgentBehaviour(AgentBehaviour value)
+        {
+            agentBehaviour = value;
         }
 
         #region Max and min time
