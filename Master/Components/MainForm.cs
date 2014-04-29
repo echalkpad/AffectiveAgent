@@ -31,6 +31,7 @@ namespace Master
 
             this.model = model;
             this.graphController = new GraphController(model, graphControl);
+            this.updateGraphTimer.Start();
             this.updateCOMTimer.Start();
         }
 
@@ -260,8 +261,11 @@ namespace Master
 
         private void updateCOMTimer_Tick(object sender, EventArgs e)
         {
-            int state = model.getInterpreter().Update();
-            model.getCOM().switchState(state);
+            if (!agentOffRadioButton.Checked)
+            {
+                int state = model.getInterpreter().Update();
+                model.getCOM().switchState(state);
+            }
         }
     }
 }

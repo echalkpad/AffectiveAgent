@@ -46,20 +46,53 @@ namespace Master
             if (values.Count == 0)
                 return -100;
             else
-                return (int) Math.Round(values[values.Count - 1].value);
+            {
+                int value = (int)Math.Round(values[values.Count - 1].value);
+                if (value > 3)
+                    value = 3;
+                else if (value < -3)
+                    value = -3;
+                return value;
+            }
         }
 
         public void Interpret(DateTime dateTime)
         {
             if (model.getAgentBehaviour() == Model.AgentBehaviour.ON)
             {
-                values.Add(new TimeValuePair(dateTime, 0.0));
+                InterpretOn(dateTime);
             }
             else if (model.getAgentBehaviour() == Model.AgentBehaviour.RANDOM)
             {
-                double value = (new Random().NextDouble() - 0.5) * 6.0;
-                values.Add(new TimeValuePair(dateTime, value));
+                InterpretRandom(dateTime);
             }   
+        }
+
+        public void InterpretOn(DateTime dateTime)
+        {
+            double value = 0;
+
+            // 4.0 point of the 8.0 points are the valence of people
+            // 3.0 of the 4.0 points is the valence
+            // 0.5 of the 4.0 points is the number of interruptions 
+            // 0.5 of the 4.0 points is max value
+
+            // 4.0 point of the 8.0 points is the equal distribution
+            // 2.5 of the 4.0 points is the valence
+            // 0.5 of the 4.0 points is the speakers time
+            // 0.5 of the 4.0 points is the number of interruptions 
+            // 0.5 of the 4.0 points is max value
+            
+
+
+
+            values.Add(new TimeValuePair(dateTime, value));
+        }
+
+        public void InterpretRandom(DateTime dateTime)
+        {
+            double value = (new Random().NextDouble() - 0.5) * 6.0;
+            values.Add(new TimeValuePair(dateTime, value));
         }
 
         public DateTime minTime()
