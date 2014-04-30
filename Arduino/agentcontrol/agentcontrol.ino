@@ -1,4 +1,4 @@
-#define LED 9 // the pin for the LED
+#define LED9 9 // the pin for the LED
 #define LED10 10 // the pin for the LED
 #define LED11 11
 #include <Servo.h>
@@ -13,12 +13,8 @@ int fadeAmount = 5;    // how many points to fade the LED by
 
 
 void setup() { // bring the LED up nicely from being off
- for(i = 0 ; i <= 15; i+=1)
-  {
-    analogWrite(LED, i);
-    delay(5);
-  }
- pinMode(LED, OUTPUT); 
+ 
+ pinMode(LED9, OUTPUT); 
  pinMode(LED10, OUTPUT); 
  pinMode(LED11, OUTPUT);
  myservo.attach(8);
@@ -65,53 +61,123 @@ if(Serial.available())
 }
 void State0(){
   while(!Serial.available()){
-    digitalWrite(LED11,HIGH);
+    digitalWrite(LED9, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(300);               // wait for a second
+    digitalWrite(LED9, LOW);    // turn the LED off by making the voltage LOW
+    delay(300);
   }
-  digitalWrite(LED11,LOW);
+  digitalWrite(LED9,LOW);
 }
 void State1(){
-  while(!Serial.available()){
   
-    digitalWrite(LED10,HIGH); 
-  } 
-  digitalWrite(LED10,LOW); 
+ while(!Serial.available()){
+    digitalWrite(LED9, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1000);               // wait for a second
+    digitalWrite(LED9, LOW);    // turn the LED off by making the voltage LOW
+    delay(1000);
+  }
+  digitalWrite(LED9,LOW);
 } 
 void State2(){
   while(!Serial.available()){
-  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(1000);               // wait for a second
-  digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
-  delay(1000); 
-  }  
-  digitalWrite(LED, LOW);
+    digitalWrite(LED9, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(1500);               // wait for a second
+    digitalWrite(LED9, LOW);    // turn the LED off by making the voltage LOW
+    delay(1500);
+  }
+  digitalWrite(LED9,LOW);
 } 
 void State3(){
-  
-   
   while(!Serial.available()){
   float val = (exp(sin(millis()/2000.0*PI)) - 0.36787944)*108.0;
   analogWrite(LED11, val); 
-
   }
-    analogWrite(LED11, LOW); 
+   analogWrite(LED11, LOW); 
+
   
 } 
 void State4(){
   
-  
+  while(!Serial.available()){
+    digitalWrite(LED10, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(200);               // wait for a second
+    digitalWrite(LED10, LOW);    // turn the LED off by making the voltage LOW
+    delay(200);
+    servoState1();
+  }
+  digitalWrite(LED10,LOW);
+  myservo.write(90);
   
 } 
 void State5(){
-  
+   while(!Serial.available()){
+     servoState2();
+    digitalWrite(LED10, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(100);               // wait for a second
+    digitalWrite(LED10, LOW);    // turn the LED off by making the voltage LOW
+    delay(100);
+  }
+  digitalWrite(LED10,LOW);
+  myservo.write(90);
   
   
 }
 void State6(){
   
-  
+   while(!Serial.available()){
+     servoState3();
+    digitalWrite(LED10, HIGH);   // turn the LED on (HIGH is the voltage level)
+    delay(30);               // wait for a second
+    digitalWrite(LED10, LOW);    // turn the LED off by making the voltage LOW
+    delay(25);
+  }
+  digitalWrite(LED10,LOW);
+  myservo.write(90);
   
 } 
-    
-    
+ // Servo States 3 Intensity  
+void servoState1()
+{
+  for(pos = 0; pos < 180; pos += 1)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 180; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees 
+  {                                
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+
+}
+
+void servoState2()
+{
+  for(pos = 0; pos < 180; pos += 3)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 180; pos>=1; pos-=3)     // goes from 180 degrees to 0 degrees 
+  {                                
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+
+}
+void servoState3()
+{
+  for(pos = 0; pos < 180; pos += 10)  // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+  for(pos = 180; pos>=1; pos-=10)     // goes from 180 degrees to 0 degrees 
+  {                                
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(15);                       // waits 15ms for the servo to reach the position 
+  } 
+
+}
  
  
