@@ -54,6 +54,10 @@ namespace Master
                 List<VideoFrame> packets2 = model.getPersonB().getVideoFrames();
                 graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
             }
+            else
+            {
+                graphController.CreateGraph();
+            }
         }
 
         public void UpdateGraphAxis(Boolean boolean)

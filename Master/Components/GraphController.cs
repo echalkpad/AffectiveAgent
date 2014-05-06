@@ -62,6 +62,31 @@ namespace Master.Components
             graphPane.YAxis.Title.Text = "";
         }
 
+        public void CreateGraph()
+        {
+            // Clear the graph
+            Clear();
+
+            // Set the titles
+            graphPane.YAxis.Title.Text = "";
+
+            // Make up some data arrays based on video features
+            PointPairList list1 = new PointPairList();
+            PointPairList list2 = new PointPairList();
+
+            // Add points
+            lineItemA.Points = list1;
+            lineItemB.Points = list2;
+
+            // Add agent's graph
+            CreateAgentGraph();
+
+            // Tell ZedGraph to refigure the axis since the data have changed
+            graphControl.AxisChange();
+            if (autoScale)
+                graphControl.RestoreScale(graphControl.GraphPane);
+        }
+
         public void CreateGraph(List<AudioPacket> packets1, List<AudioPacket> packets2, int featureIndex)
         {
             // Clear the graph
@@ -272,7 +297,7 @@ namespace Master.Components
             // Some test points
             PointPairList list = new PointPairList();
             DateTime minTime = interpreter.minTime();
-            foreach (TimeValuePair value in interpreter.values)
+            foreach (ValenceData value in interpreter.values)
             {
                 double x = ComputeX(minTime, value.time);
                 double y = value.value;
@@ -287,9 +312,10 @@ namespace Master.Components
 
         public void UpdateThresholdLines()
         {
-            for (int i = -3; i <= 3; i++)
+            for (int i = -3; i <= 4; i++)
             {
-                LineObj threshHoldLine = new LineObj(Color.FromArgb(255, 175 - (Math.Abs(i) * 25), 175 - (Math.Abs(i) * 25)), graphPane.XAxis.Scale.Min, i, graphPane.XAxis.Scale.Max, i);
+                double j = (double)i - 0.5;
+                LineObj threshHoldLine = new LineObj(Color.FromArgb(255, 175 - ((int)(Math.Abs(j) * 25)), 175 - ((int)(Math.Abs(j) * 25))), graphPane.XAxis.Scale.Min, j, graphPane.XAxis.Scale.Max, j);
                 threshHoldLine.ZOrder = ZOrder.D_BehindAxis;
                 threshHoldLine.Location.CoordinateFrame = CoordType.AxisXY2Scale;
                 graphPane.GraphObjList.Add(threshHoldLine);

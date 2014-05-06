@@ -13,6 +13,7 @@ namespace Master
         public string label;
         public List<VideoPacket> videoPackets;
         public List<AudioPacket> audioPackets;
+        public List<VideoFrame> videoFrames { get { return videoPackets.SelectMany(videoPacket => videoPacket.videoFrames).ToList(); } }
 
         public Person(string label)
         {
@@ -47,6 +48,18 @@ namespace Master
         {
             videoPackets = new List<VideoPacket>();
             audioPackets = new List<AudioPacket>();
+        }
+
+        // Return all audio packets within a time range
+        public List<AudioPacket> AudioPacketsWithinRange(DateTime start, DateTime end)
+        {
+            return audioPackets.Where(audioPacket => audioPacket.time > start && audioPacket.time < end).ToList();
+        }
+
+        // Return all audio packets within a time range
+        public List<VideoFrame> VideoFramesWithinRange(DateTime start, DateTime end)
+        {
+            return videoFrames.Where(frame => frame.time > start && frame.time < end).ToList();
         }
 
         //Deserialization constructor.
