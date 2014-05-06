@@ -28,6 +28,7 @@ namespace Master
 
         public void switchState(int state)
         {
+            state = state + 3;
             serialPort1.Write(state.ToString());
         }
 

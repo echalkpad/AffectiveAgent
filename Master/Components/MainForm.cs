@@ -257,6 +257,7 @@ namespace Master
             }
             print("");
             graphController.Clear();
+            model.getInterpreter().Clear();
         }
 
         private void clearGraphButton_Click(object sender, EventArgs e)
@@ -286,6 +287,10 @@ namespace Master
             {
                 int state = model.getInterpreter().Update();
                 model.getCOM().switchState(state);
+            }
+            else
+            {
+                model.getCOM().switchState(-3);
             }
         }
     }

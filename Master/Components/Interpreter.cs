@@ -44,14 +44,11 @@ namespace Master
         {
             Interpret(DateTime.Now);
             if (values.Count == 0)
-                return 0;
+                return -3;
             else
             {
                 int value = (int)Math.Round(values[values.Count - 1].value);
-                if (value > 3)
-                    value = 3;
-                else if (value < -3)
-                    value = -3;
+
                 return value;
             }
         }
@@ -112,7 +109,8 @@ namespace Master
 
         public void InterpretRandom(DateTime dateTime)
         {
-            double value = (new Random().NextDouble() - 0.5) * 6.0;
+            Random random = new Random();
+            double value = (random.NextDouble() - 0.5) * 6.0;
             values.Add(new ValenceData(dateTime, value));
         }
 
