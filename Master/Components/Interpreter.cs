@@ -125,7 +125,7 @@ namespace Master
             double valence;
             if (pos + neg >= 10)
             {
-                if (neg > 0)
+                if (pos > 0)
                 {
                     valence = neg / pos;
                 }
