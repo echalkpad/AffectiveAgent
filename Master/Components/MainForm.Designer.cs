@@ -151,7 +151,7 @@
             // 
             // drawButton
             // 
-            this.drawButton.Location = new System.Drawing.Point(775, 247);
+            this.drawButton.Location = new System.Drawing.Point(775, 260);
             this.drawButton.Name = "drawButton";
             this.drawButton.Size = new System.Drawing.Size(95, 23);
             this.drawButton.TabIndex = 7;
@@ -164,17 +164,18 @@
             this.PacketListBox.FormattingEnabled = true;
             this.PacketListBox.Items.AddRange(new object[] {
             "Audio packets",
-            "Video packets"});
+            "Video packets",
+            "Agent\'s valence"});
             this.PacketListBox.Location = new System.Drawing.Point(775, 25);
             this.PacketListBox.Name = "PacketListBox";
-            this.PacketListBox.Size = new System.Drawing.Size(95, 30);
+            this.PacketListBox.Size = new System.Drawing.Size(95, 43);
             this.PacketListBox.TabIndex = 8;
             this.PacketListBox.SelectedIndexChanged += new System.EventHandler(this.PacketListBox_SelectedIndexChanged);
             // 
             // featureListBox
             // 
             this.featureListBox.FormattingEnabled = true;
-            this.featureListBox.Location = new System.Drawing.Point(775, 61);
+            this.featureListBox.Location = new System.Drawing.Point(775, 74);
             this.featureListBox.Name = "featureListBox";
             this.featureListBox.Size = new System.Drawing.Size(95, 134);
             this.featureListBox.TabIndex = 9;
@@ -207,7 +208,7 @@
             this.liveCheckBox.AutoSize = true;
             this.liveCheckBox.Checked = true;
             this.liveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.liveCheckBox.Location = new System.Drawing.Point(775, 224);
+            this.liveCheckBox.Location = new System.Drawing.Point(775, 237);
             this.liveCheckBox.Name = "liveCheckBox";
             this.liveCheckBox.Size = new System.Drawing.Size(46, 17);
             this.liveCheckBox.TabIndex = 12;
@@ -226,7 +227,7 @@
             this.AutoResizeCheckBox.AutoSize = true;
             this.AutoResizeCheckBox.Checked = true;
             this.AutoResizeCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 201);
+            this.AutoResizeCheckBox.Location = new System.Drawing.Point(775, 214);
             this.AutoResizeCheckBox.Name = "AutoResizeCheckBox";
             this.AutoResizeCheckBox.Size = new System.Drawing.Size(78, 17);
             this.AutoResizeCheckBox.TabIndex = 13;
@@ -246,7 +247,7 @@
             // 
             // clearGraphButton
             // 
-            this.clearGraphButton.Location = new System.Drawing.Point(775, 277);
+            this.clearGraphButton.Location = new System.Drawing.Point(775, 290);
             this.clearGraphButton.Name = "clearGraphButton";
             this.clearGraphButton.Size = new System.Drawing.Size(95, 23);
             this.clearGraphButton.TabIndex = 15;

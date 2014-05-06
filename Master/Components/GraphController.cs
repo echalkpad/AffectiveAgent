@@ -20,6 +20,8 @@ namespace Master.Components
         {
             get { return model.getInterpreter(); }
         }
+        double min;
+        double max;
 
         public GraphController(Model model, ZedGraphControl graphControl)
         {
@@ -50,6 +52,10 @@ namespace Master.Components
 
         public void Clear()
         {
+            // Reset min and max
+            min = 0.0;
+            max = 0.0;
+
             // Clear data
             lineItemA.Clear();
             lineItemB.Clear();
@@ -62,6 +68,7 @@ namespace Master.Components
             graphPane.YAxis.Title.Text = "";
         }
 
+        // Create empty graph
         public void CreateGraph()
         {
             // Clear the graph
@@ -82,11 +89,10 @@ namespace Master.Components
             CreateAgentGraph();
 
             // Tell ZedGraph to refigure the axis since the data have changed
-            graphControl.AxisChange();
-            if (autoScale)
-                graphControl.RestoreScale(graphControl.GraphPane);
+            Rescale();
         }
 
+        // Create audio data graph
         public void CreateGraph(List<AudioPacket> packets1, List<AudioPacket> packets2, int featureIndex)
         {
             // Clear the graph
@@ -121,6 +127,10 @@ namespace Master.Components
                             y1 = packets1[i].maxValue;
                             break;
                     }
+                    if (y1 < min)
+                        min = y1;
+                    if (y1 > max)
+                        max = y1;
                     list1.Add(x1, y1);
                 }
 
@@ -144,6 +154,10 @@ namespace Master.Components
                             y2 = packets2[i].maxValue;
                             break;
                     }
+                    if (y2 < min)
+                        min = y2;
+                    if (y2 > max)
+                        max = y2;
                     list2.Add(x2, y2);
                 }
             }
@@ -156,11 +170,10 @@ namespace Master.Components
             CreateAgentGraph();
 
             // Tell ZedGraph to refigure the axis since the data have changed
-            graphControl.AxisChange();
-            if (autoScale)
-                graphControl.RestoreScale(graphControl.GraphPane);
+            Rescale();
         }
 
+        // Create video data graph
         public void CreateGraph(List<VideoFrame> packets1, List<VideoFrame> packets2, int featureIndex)
         {
             // Clear the graph
@@ -224,6 +237,10 @@ namespace Master.Components
                             y1 = packets1[i].valenceIntensity;
                             break;
                     }
+                    if (y1 < min)
+                        min = y1;
+                    if (y1 > max)
+                        max = y1;
                     list1.Add(x1, y1);
                 }
 
@@ -275,6 +292,10 @@ namespace Master.Components
                             y2 = packets2[i].valenceIntensity;
                             break;
                     }
+                    if (y2 < min)
+                        min = y2;
+                    if (y2 > max)
+                        max = y2;
                     list2.Add(x2, y2);
                 }
             }
@@ -287,14 +308,83 @@ namespace Master.Components
             CreateAgentGraph();
 
             // Tell ZedGraph to refigure the axis since the data have changed
-            graphControl.AxisChange();
-            if (autoScale)
-                graphControl.RestoreScale(graphControl.GraphPane);
+            Rescale();
+        }
+
+        // Create agent's state graph
+        public void CreateGraph(int featureIndex)
+        {
+            // Clear the graph
+            Clear();
+
+            // Set the titles
+            graphPane.Title.Text = "Agent's state";
+            graphPane.YAxis.Title.Text = "";
+
+            // Get points
+            PointPairList list = new PointPairList();
+            DateTime minTime = interpreter.minTime();
+            foreach (ValenceData value in interpreter.values)
+            {
+                double x = ComputeX(minTime, value.time);
+                double y = 0;
+                switch (featureIndex)
+                {
+                    case 0:
+                        y = value.valenceVa;
+                        graphPane.YAxis.Title.Text = "Valence";
+                        break;
+                    case 1:
+                        y = value.interruptionsVa;
+                        graphPane.YAxis.Title.Text = "Interruptions";
+                        break;
+                    case 2:
+                        y = value.maxVa;
+                        graphPane.YAxis.Title.Text = "Max value";
+                        break;
+                    case 3:
+                        y = value.valence;
+                        graphPane.YAxis.Title.Text = "Total valence";
+                        break;
+                    case 4:
+                        y = value.valenceDi;
+                        graphPane.YAxis.Title.Text = "Valence distribution";
+                        break;
+                    case 5:
+                        y = value.timeDi;
+                        graphPane.YAxis.Title.Text = "Speaker's time distribution";
+                        break;
+                    case 6:
+                        y = value.interruptionsDi;
+                        graphPane.YAxis.Title.Text = "Interruptions distribution";
+                        break;
+                    case 7:
+                        y = value.maxDi;
+                        graphPane.YAxis.Title.Text = "Max value distribution";
+                        break;
+                    case 8:
+                        y = value.distribution;
+                        graphPane.YAxis.Title.Text = "Total distribution";
+                        break;
+                    case 9:
+                        y = value.value;
+                        graphPane.YAxis.Title.Text = "All";
+                        break;
+                }
+                list.Add(new PointPair(x, y));
+            }
+            lineItemAgent.Points = list;
+
+            // Refresh graph
+            UpdateThresholdLines();
+
+            // Tell ZedGraph to refigure the axis since the data have changed
+            Rescale();
         }
 
         public void CreateAgentGraph()
         {
-            // Some test points
+            // Get points
             PointPairList list = new PointPairList();
             DateTime minTime = interpreter.minTime();
             foreach (ValenceData value in interpreter.values)
@@ -306,8 +396,22 @@ namespace Master.Components
             lineItemAgent.Points = list;
 
             // Refresh graph
-            UpdateThresholdLines();
-            graphControl.Refresh();            
+            UpdateThresholdLines();          
+        }
+
+        public void Rescale()
+        {
+            if (min == max)
+            {
+                min = min - 1;
+                max = max + 1;
+            }
+            graphPane.YAxis.Scale.Min = min;
+            graphPane.YAxis.Scale.Max = max;
+            graphPane.Y2Axis.Scale.Min = -4;
+            graphPane.Y2Axis.Scale.Max = 4;
+            graphControl.AxisChange();
+            graphControl.Refresh();
         }
 
         public void UpdateThresholdLines()

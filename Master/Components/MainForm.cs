@@ -54,6 +54,10 @@ namespace Master
                 List<VideoFrame> packets2 = model.getPersonB().getVideoFrames();
                 graphController.CreateGraph(packets1, packets2, selectedFeatureIndex);
             }
+            else if (selectedPacketIndex == 2)
+            {
+                graphController.CreateGraph(selectedFeatureIndex);
+            }
             else
             {
                 graphController.CreateGraph();
@@ -188,6 +192,19 @@ namespace Master
                 featureListBox.Items.Add("Emotion intensity");
                 featureListBox.Items.Add("Valence");
                 featureListBox.Items.Add("Valence intensity");
+            }
+            else if (PacketListBox.SelectedIndex == 2)
+            {
+                featureListBox.Items.Add("Valence");
+                featureListBox.Items.Add("Interruptions");
+                featureListBox.Items.Add("Max value");
+                featureListBox.Items.Add("Total valence");
+                featureListBox.Items.Add("Valence distribution");
+                featureListBox.Items.Add("Speaker's time distribution");
+                featureListBox.Items.Add("Interruptions distribution");
+                featureListBox.Items.Add("Max value distribution");
+                featureListBox.Items.Add("Total distribution");
+                featureListBox.Items.Add("All");
             }
 
             selectedPacketIndex = PacketListBox.SelectedIndex;
